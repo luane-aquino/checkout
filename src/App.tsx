@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import Tabs from "./components/molecules/Tabs";
 
 const App = () => {
   return ( 
     <>
-      <div>tab</div>
+      <Tabs/>
       <Outlet/>
     </>
   );
