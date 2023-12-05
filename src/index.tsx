@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate
 } from "react-router-dom";
 import ErrorPage from './pages/ErrorPage';
 import Bag from './pages/Bag/Bag';
@@ -16,16 +16,15 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App/>,
+    path: '/',
+    element: <Navigate to='/bag' />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/bag',
-        element: <Bag/>
-      }
-    ]
   },
+  {
+    path: '/bag',
+    element: <Bag/>,
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 root.render(

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Bag.css';
+import Tabs from '../../components/molecules/Tabs';
 
 function Bag() {
   const handleClick = () => {
@@ -8,6 +9,7 @@ function Bag() {
 
   return (
     <div className="Bag">
+      <Tabs/>
       <h1>bag!</h1>
       {/* produtos */}
       {/* prices */}
