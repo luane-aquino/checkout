@@ -3,11 +3,14 @@ import "./styles.scss";
 import Tabs from "../../components/molecules/Tabs";
 import { TabContentItemEnum } from "../../common/types";
 import Button from "../../components/atoms/Button";
+import { useNavigate } from "react-router-dom";
 
 function Bag() {
+  const navigate = useNavigate();
   const handleClick = () => {
     // chama a rota payment
     console.log("***[clicked!]");
+    navigate("/payment");
   };
 
   return (
@@ -16,7 +19,6 @@ function Bag() {
       <h1>bag!</h1>
       {/* produtos */}
       {/* prices */}
-      <button onClick={handleClick}></button>
       <Button text="Seguir para o pagamento" handleClick={handleClick} />
     </div>
   );
