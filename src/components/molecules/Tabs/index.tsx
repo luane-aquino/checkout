@@ -1,98 +1,100 @@
-import { useEffect, useState } from 'react';
-import './styles.scss'
-import { useLocation } from 'react-router-dom';
-
-enum TabContentItemEnum {
-  bag = 'bag',
-  payment = 'payment',
-  success = 'success'
-}
+import "./styles.scss";
+import { useNavigate } from "react-router-dom";
+import { TabContentItemEnum } from "../../../common/types";
 
 const tabContent = {
   [TabContentItemEnum.bag]: [
     {
-      title: 'sacola',
+      title: "Sacola",
       selected: true,
-      redirectToRoute: ''
+      redirectToRoute: "",
     },
     {
-      title: 'Pagamento',
+      title: "Pagamento",
       selected: false,
-      redirectToRoute: ''
+      redirectToRoute: "",
     },
     {
-      title: 'Confirmação',
+      title: "Confirmação",
       selected: false,
-      redirectToRoute: ''
-    }
+      redirectToRoute: "",
+    },
   ],
   [TabContentItemEnum.payment]: [
     {
-      title: 'sacola',
+      title: "Sacola",
       selected: false,
-      redirectToRoute: '/bag'
+      redirectToRoute: "/bag",
     },
     {
-      title: 'Pagamento',
+      title: "Pagamento",
       selected: true,
-      redirectToRoute: ''
+      redirectToRoute: "",
     },
     {
-      title: 'Confirmação',
+      title: "Confirmação",
       selected: false,
-      redirectToRoute: ''
-    }
+      redirectToRoute: "",
+    },
   ],
   [TabContentItemEnum.success]: [
     {
-      title: 'sacola',
+      title: "Sacola",
       selected: false,
-      redirectToRoute: ''
+      redirectToRoute: "",
     },
     {
-      title: 'Pagamento',
+      title: "Pagamento",
       selected: false,
-      redirectToRoute: ''
+      redirectToRoute: "",
     },
     {
-      title: 'Confirmação',
+      title: "Confirmação",
       selected: true,
-      redirectToRoute: ''
-    }
-  ]
-}
+      redirectToRoute: "",
+    },
+  ],
+};
 
 type ListItemType = {
-  title: string
-  selected: boolean
-  redirectToRoute: string
-}
+  title: string;
+  selected: boolean;
+  redirectToRoute: string;
+};
 
-const Tabs = () => {
-  let location = useLocation()
-  const [list, setList] = useState<ListItemType[]>()
+type TabsType = {
+  path:
+    | TabContentItemEnum.bag
+    | TabContentItemEnum.payment
+    | TabContentItemEnum.success;
+};
 
-  useEffect(() => {
-    const pathToTabContentItem: Record<string, TabContentItemEnum> = {
-      bag: TabContentItemEnum.bag,
-      payment: TabContentItemEnum.payment,
-      success: TabContentItemEnum.success,
-    };
-
-    const path = location.pathname.replace(/\//, '');
-    const tabContentItem = pathToTabContentItem[path];
-    if (tabContentItem) {
-      setList(tabContent[tabContentItem]);
-    }
-  }, [location]);
+const Tabs = ({ path }: TabsType) => {
+  const navigate = useNavigate();
+  const pathToTabContentItem: Record<string, TabContentItemEnum> = {
+    bag: TabContentItemEnum.bag,
+    payment: TabContentItemEnum.payment,
+    success: TabContentItemEnum.success,
+  };
+  const tabContentItem = pathToTabContentItem[path];
+  const list: ListItemType[] = tabContent[tabContentItem];
 
   return (
     <div className="Tabs">
       <div role="tablist" className="tablist">
-        {list?.map((item, index) => (<button role="tab" key={index} className='tablist__btn'>{item.title}</button>))}
+        {list?.map((item, index) => (
+          <button
+            role="tab"
+            key={index}
+            className={`tablist__btn ${item.selected && "tablist__active"}`}
+            onClick={() => navigate(item.redirectToRoute)}
+          >
+            {item.title}
+          </button>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default Tabs;
