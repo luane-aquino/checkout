@@ -1,0 +1,25 @@
+.payment-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+
+  p {
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .purple {
+    color: #9222dc;
+    font-weight: 700;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+}

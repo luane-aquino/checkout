@@ -1,0 +1,41 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .image {
+    flex: 0.8;
+  }
+
+  .desc {
+    flex: 2;
+    margin: 0;
+  }
+
+  .pricing {
+    flex: 0.8;
+  }
+}
+
+.pricing {
+  letter-spacing: 0.269px;
+  text-align: end;
+}
+
+.price {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  margin: 0;
+}
+
+.price-old {
+  color: #9b9b9b;
+  margin-bottom: 8px;
+  &__value {
+    text-decoration: line-through;
+    display: inline-block;
+    margin: 0;
+  }
+}
