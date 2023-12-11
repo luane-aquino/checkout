@@ -27,7 +27,7 @@ const PaymentPlan = ({
         <p>R$ {BrazilianCurrency.format(shipping)}</p>
       </li>
       <li className="payment-plan__item">
-        <p>Desconto</p>
+        <p>Desconto:</p>
         <p className="purple">R$ {BrazilianCurrency.format(discount)}</p>
       </li>
       <li className="payment-plan__item bold">
