@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { TabContentItemEnum } from "../../common/types";
 import Card from "../../components/atoms/Card";
 import Tabs from "../../components/molecules/Tabs";
@@ -8,13 +8,21 @@ import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { data } from "../../mock/data";
 import Button from "../../components/atoms/Button";
 
+type FormType = {
+  cardNumber: string;
+  cardHolderName: string;
+  cardValidUntil: "";
+  cvv: "";
+};
+
 const Payment = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+    control,
+  } = useForm<FormType>({
     defaultValues: {
       cardNumber: "",
       cardHolderName: "",
@@ -22,6 +30,21 @@ const Payment = () => {
       cvv: "",
     },
   });
+
+  const formatCardNumber = (value: any) => {
+    return value
+      .replace(/\s/g, "")
+      .replace(/(\d{4})/g, "$1 ")
+      .trim();
+  };
+
+  const formatExpiryDate = (value: any) => {
+    return value
+      .replace(/\s/g, "")
+      .replace(/^(\d{2})(\d)/g, "$1/$2")
+      .trim();
+  };
+
   return (
     <>
       <Tabs path={TabContentItemEnum.payment} />
@@ -33,19 +56,77 @@ const Payment = () => {
       >
         <Card>
           <h1>Cartão de crédito</h1>
-          <label>Número</label>
-          <input {...register("cardNumber")} />
-          <label>Nome do titular do cartão</label>
-          <input
-            {...register("cardHolderName", { required: true, maxLength: 10 })}
-          />
-          <label>Data de validade</label>
-          <input
-            {...register("cardValidUntil", { required: true, maxLength: 10 })}
-          />
-          <label>Código CVV:</label>
-          <input {...register("cvv", { required: true, maxLength: 10 })} />
-          {/* <input type="submit" /> */}
+          <div className="input-wrapper input-wrapper--fullwidth">
+            <label>Número</label>
+            <Controller
+              name="cardNumber"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  className={errors.cardNumber && "has-error"}
+                  placeholder="0000 0000 0000 0000"
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9 ]/g, "");
+                    if (value.length <= 19) {
+                      const formattedValue = formatCardNumber(value);
+                      field.onChange(formattedValue);
+                    }
+                  }}
+                />
+              )}
+            />
+            {errors.cardNumber && (
+              <p className="error-message">insira um número de cartão válido</p>
+            )}
+          </div>
+          <div className="input-wrapper input-wrapper--fullwidth">
+            <label>Nome do titular do cartão</label>
+            <input
+              placeholder="Nome impresso no cartão"
+              className={errors.cardHolderName && "has-error"}
+              {...register("cardHolderName", {
+                required: true,
+                maxLength: 100,
+              })}
+            />
+            {errors.cardHolderName && (
+              <p className="error-message">insira um nome válido</p>
+            )}
+          </div>
+          <div className="fields-wrapper">
+            <div className="input-wrapper">
+              <label>Data de validade</label>
+              <Controller
+                name="cardValidUntil"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={errors.cardValidUntil && "has-error"}
+                    placeholder="MM/AAAA"
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, "");
+                      if (value.length < 7) {
+                        const formattedValue = formatExpiryDate(value);
+                        field.onChange(formattedValue);
+                      }
+                    }}
+                  />
+                )}
+              />
+              {errors.cardValidUntil && (
+                <p className="error-message">insira uma data válida</p>
+              )}
+            </div>
+
+            <div className="input-wrapper">
+              <label>Código CVV:</label>
+              <input {...register("cvv", { required: true })} />
+            </div>
+          </div>
         </Card>
         {/* prices */}
         <Container>

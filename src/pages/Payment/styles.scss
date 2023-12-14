@@ -1,3 +1,39 @@
 .wrapper {
   padding: 24px 8px;
 }
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 48%;
+
+  input {
+    height: 44px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .has-error {
+    border-color: #de1616;
+  }
+
+  &--fullwidth {
+    width: 100%;
+  }
+}
+
+.fields-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.error-message {
+  color: #de1616;
+  font-weight: 400;
+  margin: 0;
+}
+
+.has-error {
+  border-color: #de1616;
+}
