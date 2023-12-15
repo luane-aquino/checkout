@@ -7,19 +7,19 @@ import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { data } from "../../mock/data";
 import Button from "../../components/atoms/Button";
+import { useNavigate } from "react-router-dom";
 
 type FormType = {
   cardNumber: string;
   cardHolderName: string;
-  cardValidUntil: "";
-  cvv: "";
+  cardValidUntil: string;
+  cvv: string;
 };
 
 const Payment = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     control,
   } = useForm<FormType>({
@@ -30,6 +30,7 @@ const Payment = () => {
       cvv: "",
     },
   });
+  const navigate = useNavigate();
 
   const formatCardNumber = (value: any) => {
     return value
@@ -45,14 +46,13 @@ const Payment = () => {
       .trim();
   };
 
-  console.log("***[errors]", errors);
-
   return (
     <>
       <Tabs path={TabContentItemEnum.payment} />
       <form
         onSubmit={handleSubmit((data) => {
           alert(JSON.stringify(data));
+          navigate("/confirmation");
         })}
         className="wrapper"
       >
