@@ -45,6 +45,8 @@ const Payment = () => {
       .trim();
   };
 
+  console.log("***[errors]", errors);
+
   return (
     <>
       <Tabs path={TabContentItemEnum.payment} />
@@ -55,9 +57,9 @@ const Payment = () => {
         className="wrapper"
       >
         <Card>
-          <h1>Cartão de crédito</h1>
+          <h1 className="form-title">Cartão de crédito</h1>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label>Número</label>
+            <label className="label">Número</label>
             <Controller
               name="cardNumber"
               control={control}
@@ -82,7 +84,7 @@ const Payment = () => {
             )}
           </div>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label>Nome do titular do cartão</label>
+            <label className="label">Nome do titular do cartão</label>
             <input
               placeholder="Nome impresso no cartão"
               className={errors.cardHolderName && "has-error"}
@@ -97,7 +99,7 @@ const Payment = () => {
           </div>
           <div className="fields-wrapper">
             <div className="input-wrapper">
-              <label>Data de validade</label>
+              <label className="label">Data de validade</label>
               <Controller
                 name="cardValidUntil"
                 control={control}
@@ -123,8 +125,25 @@ const Payment = () => {
             </div>
 
             <div className="input-wrapper">
-              <label>Código CVV:</label>
-              <input {...register("cvv", { required: true })} />
+              <label className="label">Código CVV:</label>
+              <input
+                type="number"
+                placeholder="000"
+                className={errors.cvv && "has-error"}
+                {...register("cvv", {
+                  required: {
+                    value: true,
+                    message: "insira um cvv válido",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "número máximo de caracteres é 3",
+                  },
+                })}
+              />
+              {errors.cvv && (
+                <p className="error-message">{errors.cvv.message}</p>
+              )}
             </div>
           </div>
         </Card>
@@ -137,7 +156,7 @@ const Payment = () => {
             discount={data.paymentPlan.discount}
             subtotal={data.paymentPlan.subtotal}
           />
-          <Button type="submit" text="Seguir para o pagamento" />
+          <Button type="submit" text="Finalizar pedido" />
         </Container>
       </form>
     </>

@@ -13,6 +13,22 @@ code {
     monospace;
 }
 
+::placeholder {
+  color: #cccccc;
+  opacity: 1; /* Firefox */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: #cccccc;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 /* * {
   outline: 1px solid red;
 } */
