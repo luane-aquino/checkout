@@ -8,6 +8,7 @@ import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { data } from "../../mock/data";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
+import { usePayment } from "../../store/PaymentDetailsProvider";
 
 type FormType = {
   cardNumber: string;
@@ -31,6 +32,7 @@ const Payment = () => {
     },
   });
   const navigate = useNavigate();
+  const { setPaymentValue } = usePayment();
 
   const formatCardNumber = (value: any) => {
     return value
@@ -52,6 +54,7 @@ const Payment = () => {
       <form
         onSubmit={handleSubmit((data) => {
           alert(JSON.stringify(data));
+          setPaymentValue(data);
           navigate("/confirmation");
         })}
         className="wrapper"
