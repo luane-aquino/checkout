@@ -5,6 +5,7 @@ type ButtonType = {
   handleClick?: () => void;
   isPrimary?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
+  isDisabled?: boolean;
 };
 
 const Button = ({
@@ -12,12 +13,14 @@ const Button = ({
   isPrimary = true,
   handleClick,
   type = "button",
+  isDisabled = false,
 }: ButtonType) => {
   return (
     <button
       type={type}
       onClick={handleClick}
       className={`button ${isPrimary ? "primary" : "secondary"}`}
+      disabled={isDisabled}
     >
       {text}
     </button>

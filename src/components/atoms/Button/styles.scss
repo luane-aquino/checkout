@@ -11,6 +11,10 @@
   border: none;
 }
 
+.button:disabled {
+  background-color: #ccc;
+}
+
 .primary {
   background-color: #9222dc;
 }

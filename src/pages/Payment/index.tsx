@@ -9,6 +9,7 @@ import { data } from "../../mock/data";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { usePayment } from "../../store/PaymentDetailsProvider";
+import { isObjectEmpty } from "../../utils/objectUtils";
 
 type FormType = {
   cardNumber: string;
@@ -47,6 +48,8 @@ const Payment = () => {
       .replace(/^(\d{2})(\d)/g, "$1/$2")
       .trim();
   };
+
+  console.log("***[errors]", errors);
 
   return (
     <>
@@ -159,7 +162,11 @@ const Payment = () => {
             discount={data.paymentPlan.discount}
             subtotal={data.paymentPlan.subtotal}
           />
-          <Button type="submit" text="Finalizar pedido" />
+          <Button
+            type="submit"
+            text="Finalizar pedido"
+            isDisabled={!isObjectEmpty(errors)}
+          />
         </Container>
       </form>
     </>
