@@ -30,7 +30,7 @@ const PaymentPlan = ({
         <p>Desconto:</p>
         <p className="purple">R$ {BrazilianCurrency.format(discount)}</p>
       </li>
-      <li className="payment-plan__item bold">
+      <li className="payment-plan__item bigger">
         <p>Subtotal</p>
         <p>R$ {BrazilianCurrency.format(subtotal)}</p>
       </li>
