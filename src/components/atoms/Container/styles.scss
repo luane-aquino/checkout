@@ -5,7 +5,8 @@
   flex-direction: column;
   gap: 24px;
   margin-top: 24px;
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   left: 0;
   right: 0;
 }

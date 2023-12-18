@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
 
-const data = {
-  cardNumber: "",
-  cardHolder: "",
-  expiryDate: "",
+type PaymentType = {
+  payment: {
+    cardNumber: string;
+    cardHolderName: string;
+    cardValidUntil: string;
+  };
+};
+
+const data: PaymentType = {
+  payment: { cardNumber: "", cardHolderName: "", cardValidUntil: "" },
 };
 
 export const PaymentContext = React.createContext<any>(data);
@@ -17,7 +23,7 @@ type PaymentDetailsProviderProps = {
 export default function PaymentDetailsProvider({
   children,
 }: PaymentDetailsProviderProps) {
-  const [payment, setPayment] = useState(data);
+  const [payment, setPayment] = useState<PaymentType>(data);
 
   const setPaymentValue = (value: any) => {
     setPayment(value);
