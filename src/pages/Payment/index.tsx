@@ -35,28 +35,26 @@ const Payment = () => {
   const navigate = useNavigate();
   const { setPaymentValue } = usePayment();
 
-  const formatCardNumber = (value: any) => {
+  const formatCardNumber = (value: string) => {
     return value
       .replace(/\s/g, "")
       .replace(/(\d{4})/g, "$1 ")
       .trim();
   };
 
-  const formatExpiryDate = (value: any) => {
+  const formatExpiryDate = (value: string) => {
     return value
       .replace(/\s/g, "")
       .replace(/^(\d{2})(\d)/g, "$1/$2")
       .trim();
   };
 
-  console.log("***[errors]", errors);
-
   return (
     <>
       <Tabs path={TabContentItemEnum.payment} />
       <form
         onSubmit={handleSubmit((data) => {
-          alert(JSON.stringify(data));
+          console.log("***[data]", data);
           setPaymentValue(data);
           navigate("/confirmation");
         })}

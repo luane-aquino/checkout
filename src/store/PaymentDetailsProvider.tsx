@@ -1,17 +1,20 @@
 import React, { useContext, useState } from "react";
 
 type PaymentType = {
-  payment: {
-    cardNumber: string;
-    cardHolderName: string;
-    cardValidUntil: string;
-  };
+  cardNumber: string;
+  cardHolderName: string;
+  cardValidUntil: string;
+  cvv: string;
 };
 
 const data: PaymentType = {
-  payment: { cardNumber: "", cardHolderName: "", cardValidUntil: "" },
+  cardNumber: "",
+  cardHolderName: "",
+  cardValidUntil: "",
+  cvv: "",
 };
 
+// TODO refact type
 export const PaymentContext = React.createContext<any>(data);
 
 export const usePayment = () => useContext(PaymentContext);
@@ -25,7 +28,7 @@ export default function PaymentDetailsProvider({
 }: PaymentDetailsProviderProps) {
   const [payment, setPayment] = useState<PaymentType>(data);
 
-  const setPaymentValue = (value: any) => {
+  const setPaymentValue = (value: PaymentType) => {
     setPayment(value);
   };
 
