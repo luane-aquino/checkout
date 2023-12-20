@@ -1,5 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import { TabContentItemEnum } from "../../common/types";
+import { PaymentType, TabContentItemEnum } from "../../common/types";
 import Card from "../../components/atoms/Card";
 import Tabs from "../../components/molecules/Tabs";
 import "./styles.scss";
@@ -11,20 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { usePayment } from "../../store/PaymentDetailsProvider";
 import { isObjectEmpty } from "../../utils/objectUtils";
 
-type FormType = {
-  cardNumber: string;
-  cardHolderName: string;
-  cardValidUntil: string;
-  cvv: string;
-};
-
 const Payment = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<FormType>({
+  } = useForm<PaymentType>({
     defaultValues: {
       cardNumber: "",
       cardHolderName: "",
