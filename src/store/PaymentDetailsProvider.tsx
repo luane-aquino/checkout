@@ -14,8 +14,14 @@ const data: PaymentType = {
   cvv: "",
 };
 
-// TODO refact type
-export const PaymentContext = React.createContext<any>(data);
+type PaymentContextType = {
+  payment: PaymentType;
+  setPaymentValue: (value: PaymentType) => void;
+};
+
+export const PaymentContext = React.createContext<PaymentContextType | null>(
+  null,
+);
 
 export const usePayment = () => useContext(PaymentContext);
 
