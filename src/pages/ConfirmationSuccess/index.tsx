@@ -1,5 +1,5 @@
 import React from "react";
-import { TabContentItemEnum } from "../../common/types";
+import { PaymentContextType, TabContentItemEnum } from "../../common/types";
 import Tabs from "../../components/molecules/Tabs";
 import { usePayment } from "../../store/PaymentDetailsProvider";
 import PaymentDetails from "../../components/molecules/PaymentDetails";
@@ -13,7 +13,7 @@ import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 
 const ConfirmationSuccess = () => {
-  const { payment } = usePayment();
+  const { payment } = usePayment() as PaymentContextType;
   const navigate = useNavigate();
 
   const handleClick = () => {
