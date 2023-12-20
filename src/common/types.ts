@@ -10,3 +10,8 @@ export type PaymentType = {
   cardValidUntil: string;
   cvv: string;
 };
+
+export type PaymentContextType = {
+  payment: PaymentType;
+  setPaymentValue: (value: PaymentType) => void;
+};

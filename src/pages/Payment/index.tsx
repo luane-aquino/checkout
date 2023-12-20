@@ -1,5 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
-import { PaymentType, TabContentItemEnum } from "../../common/types";
+import {
+  PaymentContextType,
+  PaymentType,
+  TabContentItemEnum,
+} from "../../common/types";
 import Card from "../../components/atoms/Card";
 import Tabs from "../../components/molecules/Tabs";
 import "./styles.scss";
@@ -26,7 +30,7 @@ const Payment = () => {
     },
   });
   const navigate = useNavigate();
-  const { setPaymentValue } = usePayment();
+  const { setPaymentValue } = usePayment() as PaymentContextType;
 
   const formatCardNumber = (value: string) => {
     return value
