@@ -17,7 +17,6 @@ import { isObjectEmpty } from "../../utils/objectUtils";
 
 const Payment = () => {
   const {
-    register,
     handleSubmit,
     formState: { errors },
     control,
@@ -86,13 +85,17 @@ const Payment = () => {
           </div>
           <div className="input-wrapper input-wrapper--fullwidth">
             <label className="label">Nome do titular do cartão</label>
-            <input
-              placeholder="Nome impresso no cartão"
-              className={errors.cardHolderName && "has-error"}
-              {...register("cardHolderName", {
-                required: true,
-                maxLength: 100,
-              })}
+            <Controller
+              name="cardHolderName"
+              control={control}
+              rules={{ required: true, maxLength: 100 }}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  className={errors.cardHolderName && "has-error"}
+                  placeholder="Nome impresso no cartão"
+                />
+              )}
             />
             {errors.cardHolderName && (
               <p className="error-message">insira um nome válido</p>
@@ -127,11 +130,10 @@ const Payment = () => {
 
             <div className="input-wrapper">
               <label className="label">Código CVV:</label>
-              <input
-                type="number"
-                placeholder="000"
-                className={errors.cvv && "has-error"}
-                {...register("cvv", {
+              <Controller
+                name="cvv"
+                control={control}
+                rules={{
                   required: {
                     value: true,
                     message: "insira um cvv válido",
@@ -140,7 +142,15 @@ const Payment = () => {
                     value: 3,
                     message: "número máximo de caracteres é 3",
                   },
-                })}
+                }}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    type="number"
+                    className={errors.cvv && "has-error"}
+                    placeholder="000"
+                  />
+                )}
               />
               {errors.cvv && (
                 <p className="error-message">{errors.cvv.message}</p>
