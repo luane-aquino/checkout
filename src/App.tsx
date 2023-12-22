@@ -10,8 +10,10 @@ import Bag from "./pages/Bag";
 import Payment from "./pages/Payment";
 import ConfirmationSuccess from "./pages/ConfirmationSuccess";
 import PaymentDetailsProvider from "./store/PaymentDetailsProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
+  const queryClient = new QueryClient();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -37,7 +39,9 @@ const App = () => {
 
   return (
     <PaymentDetailsProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </PaymentDetailsProvider>
   );
 };

@@ -5,18 +5,26 @@ import { TabContentItemEnum } from "../../common/types";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../components/molecules/Product";
-import { data } from "../../mock/data";
 import Card from "../../components/atoms/Card";
 import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../../apis";
 
 function Bag() {
   const navigate = useNavigate();
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
   const handleClick = () => {
     // chama a rota payment
     console.log("***[clicked!]");
     navigate("/payment");
   };
+
+  console.log("***[data]", data);
 
   return (
     <div className="Bag">
@@ -25,7 +33,7 @@ function Bag() {
       <div className="products-wrapper">
         <Card>
           <Product.Root>
-            {data.products.map((item, index) => (
+            {data?.products.map((item: any, index: any) => (
               <Product.DescriptionWithPrice
                 imageUrl={item.imageUrl}
                 description={item.description}
@@ -40,11 +48,11 @@ function Bag() {
       {/* prices */}
       <Container>
         <PaymentPlan
-          quantity={data.products.length}
-          total={data.paymentPlan.total}
-          shipping={data.paymentPlan.shipping}
-          discount={data.paymentPlan.discount}
-          subtotal={data.paymentPlan.subtotal}
+          quantity={data?.products.length}
+          total={data?.paymentPlan.total}
+          shipping={data?.paymentPlan.shipping}
+          discount={data?.paymentPlan.discount}
+          subtotal={data?.paymentPlan.subtotal}
         />
         <Button text="Seguir para o pagamento" handleClick={handleClick} />
       </Container>
