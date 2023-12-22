@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import Tabs from "../../components/molecules/Tabs";
-import { TabContentItemEnum } from "../../common/types";
+import { ProductType, TabContentItemEnum } from "../../common/types";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../components/molecules/Product";
@@ -33,7 +33,7 @@ function Bag() {
       <div className="products-wrapper">
         <Card>
           <Product.Root>
-            {data?.products.map((item: any, index: any) => (
+            {data?.products.map((item: ProductType, index: number) => (
               <Product.DescriptionWithPrice
                 imageUrl={item.imageUrl}
                 description={item.description}

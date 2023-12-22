@@ -15,3 +15,10 @@ export type PaymentContextType = {
   payment: PaymentType;
   setPaymentValue: (value: PaymentType) => void;
 };
+
+export type ProductType = {
+  imageUrl: string;
+  description: string;
+  price: number;
+  oldPrice?: number;
+};
