@@ -9,6 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Bag from "./pages/Bag";
 import Payment from "./pages/Payment";
 import ConfirmationSuccess from "./pages/ConfirmationSuccess";
+import PaymentDetailsProvider from "./store/PaymentDetailsProvider";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -34,7 +35,11 @@ const App = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <PaymentDetailsProvider>
+      <RouterProvider router={router} />
+    </PaymentDetailsProvider>
+  );
 };
 
 export default App;
