@@ -1,5 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import {
+  CartContextType,
   PaymentContextType,
   PaymentType,
   TabContentItemEnum,
@@ -9,11 +10,11 @@ import Tabs from "../../components/molecules/Tabs";
 import "./styles.scss";
 import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
-import { data } from "../../mock/data";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { usePayment } from "../../store/PaymentDetailsProvider";
 import { isObjectEmpty } from "../../utils/objectUtils";
+import { useCart } from "../../store/CartProvider";
 
 const Payment = () => {
   const {
@@ -30,6 +31,7 @@ const Payment = () => {
   });
   const navigate = useNavigate();
   const { setPaymentValue } = usePayment() as PaymentContextType;
+  const { cart } = useCart() as CartContextType;
 
   const formatCardNumber = (value: string) => {
     return value
@@ -161,11 +163,11 @@ const Payment = () => {
         {/* prices */}
         <Container>
           <PaymentPlan
-            quantity={data.products.length}
-            total={data.paymentPlan.total}
-            shipping={data.paymentPlan.shipping}
-            discount={data.paymentPlan.discount}
-            subtotal={data.paymentPlan.subtotal}
+            quantity={cart.products.length}
+            total={cart.paymentPlan.total}
+            shipping={cart.paymentPlan.shipping}
+            discount={cart.paymentPlan.discount}
+            subtotal={cart.paymentPlan.subtotal}
           />
           <Button
             type="submit"

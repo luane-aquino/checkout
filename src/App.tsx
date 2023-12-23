@@ -11,6 +11,7 @@ import Payment from "./pages/Payment";
 import ConfirmationSuccess from "./pages/ConfirmationSuccess";
 import PaymentDetailsProvider from "./store/PaymentDetailsProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CartProvider from "./store/CartProvider";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -39,9 +40,11 @@ const App = () => {
 
   return (
     <PaymentDetailsProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <CartProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </CartProvider>
     </PaymentDetailsProvider>
   );
 };

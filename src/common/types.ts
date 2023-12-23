@@ -22,3 +22,20 @@ export type ProductType = {
   price: number;
   oldPrice?: number;
 };
+
+type PaymentPlanType = {
+  total: number;
+  shipping: number;
+  discount: number;
+  subtotal: number;
+};
+
+export type CartType = {
+  paymentPlan: PaymentPlanType;
+  products: ProductType[];
+};
+
+export type CartContextType = {
+  cart: CartType;
+  setCartValue: (value: CartType) => void;
+};

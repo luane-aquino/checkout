@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import Tabs from "../../components/molecules/Tabs";
-import { ProductType, TabContentItemEnum } from "../../common/types";
+import {
+  CartContextType,
+  ProductType,
+  TabContentItemEnum,
+} from "../../common/types";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../components/molecules/Product";
@@ -10,9 +14,11 @@ import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../apis";
+import { useCart } from "../../store/CartProvider";
 
 function Bag() {
   const navigate = useNavigate();
+  const { setCartValue } = useCart() as CartContextType;
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
@@ -24,7 +30,11 @@ function Bag() {
     navigate("/payment");
   };
 
-  console.log("***[data]", data);
+  useEffect(() => {
+    if (data) {
+      setCartValue(data);
+    }
+  }, [data]);
 
   return (
     <div className="Bag">

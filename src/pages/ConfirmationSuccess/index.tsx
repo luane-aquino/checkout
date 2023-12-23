@@ -1,19 +1,24 @@
 import React from "react";
-import { PaymentContextType, TabContentItemEnum } from "../../common/types";
+import {
+  CartContextType,
+  PaymentContextType,
+  TabContentItemEnum,
+} from "../../common/types";
 import Tabs from "../../components/molecules/Tabs";
 import { usePayment } from "../../store/PaymentDetailsProvider";
 import PaymentDetails from "../../components/molecules/PaymentDetails";
 import "./styles.scss";
 import Card from "../../components/atoms/Card";
 import { Product } from "../../components/molecules/Product";
-import { data } from "../../mock/data";
 import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../store/CartProvider";
 
 const ConfirmationSuccess = () => {
   const { payment } = usePayment() as PaymentContextType;
+  const { cart } = useCart() as CartContextType;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -32,7 +37,7 @@ const ConfirmationSuccess = () => {
         <Card>
           <Product.Title title="Produtos" />
           <Product.Root>
-            {data.products.map((item, index) => (
+            {cart.products.map((item, index) => (
               <Product.Description
                 imageUrl={item.imageUrl}
                 description={item.description}
@@ -44,11 +49,11 @@ const ConfirmationSuccess = () => {
       </div>
       <Container>
         <PaymentPlan
-          quantity={data.products.length}
-          total={data.paymentPlan.total}
-          shipping={data.paymentPlan.shipping}
-          discount={data.paymentPlan.discount}
-          subtotal={data.paymentPlan.subtotal}
+          quantity={cart.products.length}
+          total={cart.paymentPlan.total}
+          shipping={cart.paymentPlan.shipping}
+          discount={cart.paymentPlan.discount}
+          subtotal={cart.paymentPlan.subtotal}
         />
         <Button
           type="submit"
