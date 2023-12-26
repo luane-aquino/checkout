@@ -16,13 +16,21 @@ const ProductDescriptionWithPrice = ({
 }: ProductDescriptionWithPriceType) => {
   return (
     <li className="list-item">
-      <img src={imageUrl} alt="" width="60px" height="60px" className="image" />
+      <img
+        src={imageUrl}
+        alt=""
+        width="60px"
+        height="60px"
+        className="image"
+        aria-hidden
+      />
       <p className="desc">{description}</p>
       <div className="pricing">
         {oldPrice && (
           <div
             className="price-old"
             aria-label={`${BrazilianCurrency.format(oldPrice)} reais`}
+            data-testid="price-old"
           >
             <span aria-hidden>R$ </span>
             <p className="price-old__value" aria-hidden>
