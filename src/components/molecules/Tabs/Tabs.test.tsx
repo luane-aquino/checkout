@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Tabs from "./";
 import { TabContentItemEnum } from "../../../common/types";
+import userEvent from "@testing-library/user-event";
 
 const mockUsedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -18,5 +19,23 @@ describe("Tabs", () => {
     expect(screen.getByText("Sacola")).toBeVisible();
     expect(screen.getByText("Pagamento")).toBeVisible();
     expect(screen.getByText("Confirmação")).toBeVisible();
+  });
+
+  it("should not change route when click payment tab", () => {
+    render(<Tabs path={TabContentItemEnum.bag} />);
+
+    const paymentTab = screen.getByText("Pagamento");
+
+    userEvent.click(paymentTab);
+    expect(mockUsedNavigate).not.toHaveBeenCalledWith("/payment");
+  });
+
+  it("should change route when click bag tab", () => {
+    render(<Tabs path={TabContentItemEnum.payment} />);
+
+    const bagTab = screen.getByText("Sacola");
+
+    userEvent.click(bagTab);
+    expect(mockUsedNavigate).toHaveBeenCalledWith("/bag");
   });
 });
