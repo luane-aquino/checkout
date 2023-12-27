@@ -18,7 +18,7 @@ const PaymentPlan = ({
 }: PaymentPlanType) => {
   const text = quantity === 1 ? "produto" : "produtos";
   return (
-    <ul className="payment-plan">
+    <ul className="payment-plan" data-testid="PaymentPlan">
       <li
         className="payment-plan__item"
         aria-label={`${quantity} ${text}, R$ ${BrazilianCurrency.format(

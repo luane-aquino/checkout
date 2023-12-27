@@ -6,7 +6,11 @@ type ProductRootType = {
 };
 
 const ProductRoot = ({ children }: ProductRootType) => {
-  return <ul className="ProductRoot">{children}</ul>;
+  return (
+    <ul className="ProductRoot" data-testid="ProductRoot">
+      {children}
+    </ul>
+  );
 };
 
 export default ProductRoot;

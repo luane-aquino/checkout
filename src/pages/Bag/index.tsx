@@ -19,7 +19,7 @@ import { useCart } from "../../store/CartProvider";
 function Bag() {
   const navigate = useNavigate();
   const { setCartValue } = useCart() as CartContextType;
-  const { isPending, error, data, isFetching } = useQuery({
+  const { data } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
