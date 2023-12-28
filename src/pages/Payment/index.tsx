@@ -52,7 +52,6 @@ const Payment = () => {
       <Tabs path={TabContentItemEnum.payment} />
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("***[data]", data);
           setPaymentValue(data);
           navigate("/confirmation");
         })}
@@ -172,7 +171,6 @@ const Payment = () => {
             </div>
           </div>
         </Card>
-        {/* prices */}
         <Container>
           <PaymentPlan
             quantity={cart.products.length}

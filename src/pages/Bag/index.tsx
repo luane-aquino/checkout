@@ -25,8 +25,6 @@ function Bag() {
   });
 
   const handleClick = () => {
-    // chama a rota payment
-    console.log("***[clicked!]");
     navigate("/payment");
   };
 
@@ -39,7 +37,6 @@ function Bag() {
   return (
     <div className="Bag">
       <Tabs path={TabContentItemEnum.bag} />
-      {/* produtos */}
       <div className="products-wrapper">
         <Card>
           <Product.Root>
@@ -55,7 +52,6 @@ function Bag() {
           </Product.Root>
         </Card>
       </div>
-      {/* prices */}
       <Container>
         <PaymentPlan
           quantity={data?.products.length}
