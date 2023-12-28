@@ -18,7 +18,6 @@ describe("PaymentDetails", () => {
       />,
     );
 
-    // Assert that the rendered text matches the provided data
     expect(
       screen.getByText(`****.****.****.${paymentDetailsMock.lastDigits}`),
     ).toBeVisible();
