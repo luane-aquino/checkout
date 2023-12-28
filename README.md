@@ -1,6 +1,6 @@
 # Checkout app
 
-This is a simple checkout app that shows 3 steps (cart, payment and confirmation). It is build using:
+This is a simple checkout app that shows 3 steps (cart, payment and confirmation). It is build using the following:
 - React
 - HTML
 - CSS
