@@ -61,7 +61,9 @@ const Payment = () => {
         <Card>
           <h1 className="form-title">Cartão de crédito</h1>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label className="label">Número</label>
+            <label className="label" htmlFor="cardNumberInput">
+              Número
+            </label>
             <Controller
               name="cardNumber"
               control={control}
@@ -69,6 +71,7 @@ const Payment = () => {
               render={({ field }) => (
                 <input
                   {...field}
+                  id="cardNumberInput"
                   className={errors.cardNumber && "has-error"}
                   placeholder="0000 0000 0000 0000"
                   onChange={(e) => {
@@ -86,7 +89,9 @@ const Payment = () => {
             )}
           </div>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label className="label">Nome do titular do cartão</label>
+            <label className="label" htmlFor="cardHolderNameInput">
+              Nome do titular do cartão
+            </label>
             <Controller
               name="cardHolderName"
               control={control}
@@ -94,6 +99,7 @@ const Payment = () => {
               render={({ field }) => (
                 <input
                   {...field}
+                  id="cardHolderNameInput"
                   className={errors.cardHolderName && "has-error"}
                   placeholder="Nome impresso no cartão"
                 />
@@ -105,7 +111,9 @@ const Payment = () => {
           </div>
           <div className="fields-wrapper">
             <div className="input-wrapper">
-              <label className="label">Data de validade</label>
+              <label className="label" htmlFor="cardValidUntilInput">
+                Data de validade
+              </label>
               <Controller
                 name="cardValidUntil"
                 control={control}
@@ -113,6 +121,7 @@ const Payment = () => {
                 render={({ field }) => (
                   <input
                     {...field}
+                    id="cardValidUntilInput"
                     className={errors.cardValidUntil && "has-error"}
                     placeholder="MM/AAAA"
                     onChange={(e) => {
@@ -131,7 +140,9 @@ const Payment = () => {
             </div>
 
             <div className="input-wrapper">
-              <label className="label">Código CVV:</label>
+              <label className="label" htmlFor="cvvInput">
+                Código CVV:
+              </label>
               <Controller
                 name="cvv"
                 control={control}
@@ -148,6 +159,7 @@ const Payment = () => {
                 render={({ field }) => (
                   <input
                     {...field}
+                    id="cvvInput"
                     type="number"
                     className={errors.cvv && "has-error"}
                     placeholder="000"
