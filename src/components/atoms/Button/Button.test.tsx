@@ -27,4 +27,15 @@ describe("Button", () => {
     expect(clickFn).toHaveBeenCalledTimes(1);
     expect(buttonElement).toHaveClass("secondary");
   });
+
+  it("should disable button", async () => {
+    const text = "example text";
+    const clickFn = jest.fn();
+    render(<Button text={text} handleClick={clickFn} isDisabled={true} />);
+
+    const buttonElement = screen.getByRole("button", { name: text });
+    expect(buttonElement).toHaveAttribute("disabled");
+    userEvent.click(buttonElement);
+    expect(clickFn).not.toHaveBeenCalled();
+  });
 });
