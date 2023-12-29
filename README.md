@@ -1,10 +1,13 @@
 # Checkout app
 
 This is a simple checkout app that shows 3 steps (cart, payment and confirmation). It is build using the following:
+
 - React
+- Typescript
 - HTML
 - CSS
 - react-query
+- react-hook-form
 - react-testing-library and Jest
 
 ## Available Scripts
