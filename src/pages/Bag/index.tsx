@@ -32,7 +32,7 @@ function Bag() {
     if (data) {
       setCartValue(data);
     }
-  }, [data]);
+  }, [data, setCartValue]);
 
   return (
     <div className="Bag">
