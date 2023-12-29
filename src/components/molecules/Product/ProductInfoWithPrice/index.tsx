@@ -1,19 +1,19 @@
 import { BrazilianCurrency } from "../../../../utils/currencyUtils";
 import "./styles.scss";
 
-type ProductDescriptionWithPriceType = {
+type ProductInfoWithPriceType = {
   imageUrl: string;
   description: string;
   price: number;
   oldPrice?: number | null;
 };
 
-const ProductDescriptionWithPrice = ({
+const ProductInfoWithPrice = ({
   imageUrl,
   description,
   price,
   oldPrice,
-}: ProductDescriptionWithPriceType) => {
+}: ProductInfoWithPriceType) => {
   return (
     <li className="list-item">
       <img
@@ -44,4 +44,4 @@ const ProductDescriptionWithPrice = ({
   );
 };
 
-export default ProductDescriptionWithPrice;
+export default ProductInfoWithPrice;

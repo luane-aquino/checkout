@@ -12,7 +12,7 @@ describe("Product", () => {
       <Card>
         <Product.Root>
           {productsData?.products.map((item: ProductType, index: number) => (
-            <Product.DescriptionWithPrice
+            <Product.InfoWithPrice
               imageUrl={item.imageUrl}
               description={item.description}
               price={item.price}
@@ -41,7 +41,7 @@ describe("Product", () => {
       <Card>
         <Product.Root>
           {productsData?.products.map((item: ProductType, index: number) => (
-            <Product.DescriptionWithPrice
+            <Product.InfoWithPrice
               imageUrl={item.imageUrl}
               description={item.description}
               price={item.price}
@@ -62,7 +62,7 @@ describe("Product", () => {
       <Card>
         <Product.Root>
           {productsData?.products.map((item: ProductType, index: number) => (
-            <Product.Description
+            <Product.Info
               imageUrl={item.imageUrl}
               description={item.description}
               key={index}

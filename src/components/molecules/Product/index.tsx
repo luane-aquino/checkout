@@ -1,11 +1,11 @@
-import ProductDescription from "./ProductDescription";
-import ProductDescriptionWithPrice from "./ProductDescriptionWithPrice";
 import ProductRoot from "./ProductRoot";
 import ProductTitle from "./ProductTitle";
+import ProductInfo from "./ProductInfo";
+import ProductInfoWithPrice from "./ProductInfoWithPrice";
 
 export const Product = {
   Root: ProductRoot,
-  DescriptionWithPrice: ProductDescriptionWithPrice,
-  Description: ProductDescription,
+  InfoWithPrice: ProductInfoWithPrice,
+  Info: ProductInfo,
   Title: ProductTitle,
 };

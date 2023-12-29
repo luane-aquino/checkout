@@ -41,7 +41,7 @@ function Bag() {
         <Card>
           <Product.Root>
             {data?.products.map((item: ProductType, index: number) => (
-              <Product.DescriptionWithPrice
+              <Product.InfoWithPrice
                 imageUrl={item.imageUrl}
                 description={item.description}
                 price={item.price}

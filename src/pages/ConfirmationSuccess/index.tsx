@@ -38,7 +38,7 @@ const ConfirmationSuccess = () => {
           <Product.Title title="Produtos" />
           <Product.Root>
             {cart.products.map((item, index) => (
-              <Product.Description
+              <Product.Info
                 imageUrl={item.imageUrl}
                 description={item.description}
                 key={index}

@@ -1,20 +1,17 @@
 import "./styles.scss";
 
-type ProductDescriptionType = {
+type ProductInfoType = {
   imageUrl: string;
   description: string;
 };
 
-const ProductDescription = ({
-  imageUrl,
-  description,
-}: ProductDescriptionType) => {
+const ProductInfo = ({ imageUrl, description }: ProductInfoType) => {
   return (
-    <li className="ProductDescription__list-item">
+    <li className="ProductInfo__list-item">
       <img src={imageUrl} alt="" width="60px" height="60px" className="image" />
       <p className="desc">{description}</p>
     </li>
   );
 };
 
-export default ProductDescription;
+export default ProductInfo;
