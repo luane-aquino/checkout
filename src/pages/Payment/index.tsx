@@ -47,19 +47,19 @@ const Payment = () => {
   };
 
   return (
-    <>
+    <div className="Payment">
       <Tabs path={TabContentItemEnum.payment} />
       <form
         onSubmit={handleSubmit((data) => {
           setPaymentValue(data);
           navigate("/confirmation");
         })}
-        className="wrapper"
+        className="Payment__form-wrapper"
       >
         <Card>
-          <h1 className="form-title">Cartão de crédito</h1>
+          <h1 className="Payment__form-title">Cartão de crédito</h1>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label className="label" htmlFor="cardNumberInput">
+            <label className="input-wrapper__label" htmlFor="cardNumberInput">
               Número
             </label>
             <Controller
@@ -70,7 +70,7 @@ const Payment = () => {
                 <input
                   {...field}
                   id="cardNumberInput"
-                  className={errors.cardNumber && "has-error"}
+                  className={errors.cardNumber && "input-wrapper__has-error"}
                   placeholder="0000 0000 0000 0000"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[^0-9 ]/g, "");
@@ -83,11 +83,16 @@ const Payment = () => {
               )}
             />
             {errors.cardNumber && (
-              <p className="error-message">insira um número de cartão válido</p>
+              <p className="input-wrapper__error-message">
+                insira um número de cartão válido
+              </p>
             )}
           </div>
           <div className="input-wrapper input-wrapper--fullwidth">
-            <label className="label" htmlFor="cardHolderNameInput">
+            <label
+              className="input-wrapper__label"
+              htmlFor="cardHolderNameInput"
+            >
               Nome do titular do cartão
             </label>
             <Controller
@@ -98,18 +103,25 @@ const Payment = () => {
                 <input
                   {...field}
                   id="cardHolderNameInput"
-                  className={errors.cardHolderName && "has-error"}
+                  className={
+                    errors.cardHolderName && "input-wrapper__has-error"
+                  }
                   placeholder="Nome impresso no cartão"
                 />
               )}
             />
             {errors.cardHolderName && (
-              <p className="error-message">insira um nome válido</p>
+              <p className="input-wrapper__error-message">
+                insira um nome válido
+              </p>
             )}
           </div>
-          <div className="fields-wrapper">
+          <div className="input-wrapper__fields-wrapper">
             <div className="input-wrapper">
-              <label className="label" htmlFor="cardValidUntilInput">
+              <label
+                className="input-wrapper__label"
+                htmlFor="cardValidUntilInput"
+              >
                 Data de validade
               </label>
               <Controller
@@ -120,7 +132,9 @@ const Payment = () => {
                   <input
                     {...field}
                     id="cardValidUntilInput"
-                    className={errors.cardValidUntil && "has-error"}
+                    className={
+                      errors.cardValidUntil && "input-wrapper__has-error"
+                    }
                     placeholder="MM/AAAA"
                     onChange={(e) => {
                       const value = e.target.value.replace(/[^0-9]/g, "");
@@ -133,12 +147,14 @@ const Payment = () => {
                 )}
               />
               {errors.cardValidUntil && (
-                <p className="error-message">insira uma data válida</p>
+                <p className="input-wrapper__error-message">
+                  insira uma data válida
+                </p>
               )}
             </div>
 
             <div className="input-wrapper">
-              <label className="label" htmlFor="cvvInput">
+              <label className="input-wrapper__label" htmlFor="cvvInput">
                 Código CVV:
               </label>
               <Controller
@@ -155,7 +171,7 @@ const Payment = () => {
                     {...field}
                     id="cvvInput"
                     type="number"
-                    className={errors.cvv && "has-error"}
+                    className={errors.cvv && "input-wrapper__has-error"}
                     placeholder="000"
                     onChange={(e) => {
                       const value = e.target.value;
@@ -167,7 +183,9 @@ const Payment = () => {
                 )}
               />
               {errors.cvv && (
-                <p className="error-message">{errors.cvv.message}</p>
+                <p className="input-wrapper__error-message">
+                  {errors.cvv.message}
+                </p>
               )}
             </div>
           </div>
@@ -181,7 +199,7 @@ const Payment = () => {
           />
         </Container>
       </form>
-    </>
+    </div>
   );
 };
 
