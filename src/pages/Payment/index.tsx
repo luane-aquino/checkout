@@ -150,10 +150,6 @@ const Payment = () => {
                     value: true,
                     message: "insira um cvv válido",
                   },
-                  maxLength: {
-                    value: 3,
-                    message: "número máximo de caracteres é 3",
-                  },
                 }}
                 render={({ field }) => (
                   <input
@@ -162,6 +158,12 @@ const Payment = () => {
                     type="number"
                     className={errors.cvv && "has-error"}
                     placeholder="000"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value.length <= 3) {
+                        field.onChange(value);
+                      }
+                    }}
                   />
                 )}
               />
