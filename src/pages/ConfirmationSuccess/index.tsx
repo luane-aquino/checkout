@@ -58,7 +58,7 @@ const ConfirmationSuccess = () => {
         <Button
           type="submit"
           text="Voltar ao inicio do protótipo"
-          isPrimary={false}
+          styleSecondary={true}
           handleClick={handleClick}
         />
       </Container>

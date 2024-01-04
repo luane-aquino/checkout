@@ -184,7 +184,7 @@ const Payment = () => {
           <Button
             type="submit"
             text="Finalizar pedido"
-            isDisabled={!isObjectEmpty(errors)}
+            disabled={!isObjectEmpty(errors)}
           />
         </Container>
       </form>

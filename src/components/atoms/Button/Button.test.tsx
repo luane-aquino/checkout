@@ -19,7 +19,7 @@ describe("Button", () => {
   it("should show button with secondary color", async () => {
     const text = "example text";
     const clickFn = jest.fn();
-    render(<Button text={text} handleClick={clickFn} isPrimary={false} />);
+    render(<Button text={text} handleClick={clickFn} styleSecondary={true} />);
 
     const buttonElement = screen.getByRole("button", { name: text });
     expect(buttonElement).toBeVisible();
@@ -31,7 +31,7 @@ describe("Button", () => {
   it("should disable button", async () => {
     const text = "example text";
     const clickFn = jest.fn();
-    render(<Button text={text} handleClick={clickFn} isDisabled={true} />);
+    render(<Button text={text} handleClick={clickFn} disabled={true} />);
 
     const buttonElement = screen.getByRole("button", { name: text });
     expect(buttonElement).toHaveAttribute("disabled");

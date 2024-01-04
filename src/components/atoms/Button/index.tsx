@@ -3,24 +3,24 @@ import "./styles.scss";
 type ButtonType = {
   text: string;
   handleClick?: () => void;
-  isPrimary?: boolean;
+  styleSecondary?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
-  isDisabled?: boolean;
+  disabled?: boolean;
 };
 
 const Button = ({
   text,
-  isPrimary = true,
+  styleSecondary = false,
   handleClick,
   type = "button",
-  isDisabled = false,
+  disabled = false,
 }: ButtonType) => {
   return (
     <button
       type={type}
       onClick={handleClick}
-      className={`button ${isPrimary ? "primary" : "secondary"}`}
-      disabled={isDisabled}
+      className={`button ${styleSecondary ? "secondary" : "primary"}`}
+      disabled={disabled}
     >
       {text}
     </button>
