@@ -55,13 +55,7 @@ function Bag() {
         </Card>
       </div>
       <Container>
-        <PaymentPlan
-          quantity={data?.products.length}
-          total={data?.paymentPlan.total}
-          shipping={data?.paymentPlan.shipping}
-          discount={data?.paymentPlan.discount}
-          subtotal={data?.paymentPlan.subtotal}
-        />
+        <PaymentPlan />
         <Button text="Seguir para o pagamento" handleClick={handleClick} />
       </Container>
     </div>

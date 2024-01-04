@@ -11,7 +11,6 @@ import {
   PaymentType,
   usePayment,
 } from "../../store/PaymentDetailsProvider";
-import { CartContextType, useCart } from "../../store/CartProvider";
 
 const Payment = () => {
   const {
@@ -28,7 +27,6 @@ const Payment = () => {
   });
   const navigate = useNavigate();
   const { setPaymentValue } = usePayment() as PaymentContextType;
-  const { cart } = useCart() as CartContextType;
 
   const formatCardNumber = (value: string) => {
     return value
@@ -175,13 +173,7 @@ const Payment = () => {
           </div>
         </Card>
         <Container>
-          <PaymentPlan
-            quantity={cart.products.length}
-            total={cart.paymentPlan.total}
-            shipping={cart.paymentPlan.shipping}
-            discount={cart.paymentPlan.discount}
-            subtotal={cart.paymentPlan.subtotal}
-          />
+          <PaymentPlan />
           <Button
             type="submit"
             text="Finalizar pedido"

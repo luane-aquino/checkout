@@ -16,7 +16,9 @@ import { CartContextType, useCart } from "../../store/CartProvider";
 
 const ConfirmationSuccess = () => {
   const { payment } = usePayment() as PaymentContextType;
-  const { cart } = useCart() as CartContextType;
+  const {
+    cart: { products },
+  } = useCart() as CartContextType;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -35,7 +37,7 @@ const ConfirmationSuccess = () => {
         <Card>
           <Product.Title title="Produtos" />
           <Product.Root>
-            {cart.products.map((item, index) => (
+            {products.map((item, index) => (
               <Product.Info
                 imageUrl={item.imageUrl}
                 description={item.description}
@@ -46,13 +48,7 @@ const ConfirmationSuccess = () => {
         </Card>
       </div>
       <Container>
-        <PaymentPlan
-          quantity={cart.products.length}
-          total={cart.paymentPlan.total}
-          shipping={cart.paymentPlan.shipping}
-          discount={cart.paymentPlan.discount}
-          subtotal={cart.paymentPlan.subtotal}
-        />
+        <PaymentPlan />
         <Button
           type="submit"
           text="Voltar ao inicio do protótipo"

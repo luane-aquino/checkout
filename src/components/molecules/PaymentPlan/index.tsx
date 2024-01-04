@@ -1,55 +1,52 @@
+import { CartContextType, useCart } from "../../../store/CartProvider";
 import { formatToBrazilianCurrency } from "../../../utils/currency";
 import "./styles.scss";
 
-type PaymentPlanType = {
-  quantity: number;
-  total: number;
-  shipping: number;
-  discount: number;
-  subtotal: number;
-};
+const PaymentPlan = () => {
+  const {
+    cart: { products, paymentPlan },
+  } = useCart() as CartContextType;
+  const text = products.length === 1 ? "produto" : "produtos";
 
-const PaymentPlan = ({
-  quantity,
-  total,
-  shipping,
-  discount,
-  subtotal,
-}: PaymentPlanType) => {
-  const text = quantity === 1 ? "produto" : "produtos";
   return (
     <ul className="payment-plan" data-testid="PaymentPlan">
       <li
         className="payment-plan__item"
-        aria-label={`${quantity} ${text}, R$ ${formatToBrazilianCurrency(
-          total,
+        aria-label={`${products.length} ${text}, R$ ${formatToBrazilianCurrency(
+          paymentPlan.total,
         )}`}
       >
-        <p aria-hidden>{`Produtos(${quantity})`}</p>
-        <p aria-hidden>R$ {formatToBrazilianCurrency(total)}</p>
+        <p aria-hidden>{`Produtos(${products.length})`}</p>
+        <p aria-hidden>R$ {formatToBrazilianCurrency(paymentPlan.total)}</p>
       </li>
       <li
         className="payment-plan__item"
-        aria-label={`frete, R$ ${formatToBrazilianCurrency(shipping)}`}
+        aria-label={`frete, R$ ${formatToBrazilianCurrency(
+          paymentPlan.shipping,
+        )}`}
       >
         <p aria-hidden>Frete:</p>
-        <p aria-hidden>R$ {formatToBrazilianCurrency(shipping)}</p>
+        <p aria-hidden>R$ {formatToBrazilianCurrency(paymentPlan.shipping)}</p>
       </li>
       <li
         className="payment-plan__item"
-        aria-label={`desconto, R$ ${formatToBrazilianCurrency(discount)}`}
+        aria-label={`desconto, R$ ${formatToBrazilianCurrency(
+          paymentPlan.discount,
+        )}`}
       >
         <p aria-hidden>Desconto:</p>
         <p className="purple" aria-hidden>
-          R$ {formatToBrazilianCurrency(discount)}
+          R$ {formatToBrazilianCurrency(paymentPlan.discount)}
         </p>
       </li>
       <li
         className="payment-plan__item bigger"
-        aria-label={`subtotal, R$ ${formatToBrazilianCurrency(subtotal)}`}
+        aria-label={`subtotal, R$ ${formatToBrazilianCurrency(
+          paymentPlan.subtotal,
+        )}`}
       >
         <p aria-hidden>Subtotal</p>
-        <p aria-hidden>R$ {formatToBrazilianCurrency(subtotal)}</p>
+        <p aria-hidden>R$ {formatToBrazilianCurrency(paymentPlan.subtotal)}</p>
       </li>
     </ul>
   );

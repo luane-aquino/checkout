@@ -1,25 +1,26 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import PaymentPlan from "./";
-import data from "../../../../public/mocks/productMock.json";
-import { CartType } from "../../../store/CartProvider";
+import { useCart } from "../../../store/CartProvider";
+
+// Mocking the store hooks
+jest.mock("../../../store/CartProvider");
 
 describe("PaymentPlan", () => {
   it("should show payment plan details", async () => {
-    const productsData = data as CartType;
-    render(
-      <PaymentPlan
-        quantity={productsData?.products.length}
-        total={productsData?.paymentPlan.total}
-        shipping={productsData?.paymentPlan.shipping}
-        discount={productsData?.paymentPlan.discount}
-        subtotal={productsData?.paymentPlan.subtotal}
-      />,
-    );
-
-    expect(screen.getByLabelText("3 produtos, R$ 624,80")).toBeVisible();
-    expect(screen.getByLabelText("frete, R$ 5,30")).toBeVisible();
-    expect(screen.getByLabelText("desconto, R$ 30,00")).toBeVisible();
-    expect(screen.getByLabelText("subtotal, R$ 600,10")).toBeVisible();
+    (useCart as any).mockReturnValue({
+      cart: {
+        products: [
+          { imageUrl: "example.jpg", description: "Product 1" },
+          { imageUrl: "example.jpg", description: "Product 2" },
+        ],
+        paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
+      },
+    });
+    render(<PaymentPlan />);
+    expect(screen.getByLabelText("2 produtos, R$ 100,00")).toBeVisible();
+    expect(screen.getByLabelText("frete, R$ 10,00")).toBeVisible();
+    expect(screen.getByLabelText("desconto, R$ 5,00")).toBeVisible();
+    expect(screen.getByLabelText("subtotal, R$ 105,00")).toBeVisible();
   });
 });
