@@ -15,30 +15,30 @@ const ProductInfoWithPrice = ({
   oldPrice,
 }: ProductInfoWithPriceType) => {
   return (
-    <li className="list-item">
+    <li className="ProductInfoWithPrice__list-item">
       <img
         src={imageUrl}
         alt=""
-        width="60px"
-        height="60px"
-        className="image"
+        className="ProductInfoWithPrice__image"
         aria-hidden
       />
-      <p className="desc">{description}</p>
-      <div className="pricing">
+      <p className="ProductInfoWithPrice__description">{description}</p>
+      <div className="ProductInfoWithPrice__pricing">
         {oldPrice && (
           <div
-            className="price-old"
+            className="ProductInfoWithPrice__price-old"
             aria-label={`${formatToBrazilianCurrency(oldPrice)} reais`}
             data-testid="price-old"
           >
             <span aria-hidden>R$ </span>
-            <p className="price-old__value" aria-hidden>
+            <p className="ProductInfoWithPrice__price-old__value" aria-hidden>
               {formatToBrazilianCurrency(oldPrice)}
             </p>
           </div>
         )}
-        <p className="price">R$ {formatToBrazilianCurrency(price)}</p>
+        <p className="ProductInfoWithPrice__price">
+          R$ {formatToBrazilianCurrency(price)}
+        </p>
       </div>
     </li>
   );

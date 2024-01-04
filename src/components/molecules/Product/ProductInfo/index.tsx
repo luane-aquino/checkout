@@ -8,7 +8,7 @@ type ProductInfoType = {
 const ProductInfo = ({ imageUrl, description }: ProductInfoType) => {
   return (
     <li className="ProductInfo__list-item">
-      <img src={imageUrl} alt="" width="60px" height="60px" className="image" />
+      <img src={imageUrl} alt="" className="ProductInfo__image" />
       <p className="desc">{description}</p>
     </li>
   );
