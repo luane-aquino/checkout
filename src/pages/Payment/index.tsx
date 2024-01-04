@@ -13,7 +13,6 @@ import PaymentPlan from "../../components/molecules/PaymentPlan";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { usePayment } from "../../store/PaymentDetailsProvider";
-import { isObjectEmpty } from "../../utils/objectUtils";
 import { useCart } from "../../store/CartProvider";
 
 const Payment = () => {
@@ -45,6 +44,10 @@ const Payment = () => {
       .replace(/\s/g, "")
       .replace(/^(\d{2})(\d)/g, "$1/$2")
       .trim();
+  };
+
+  const isObjectEmpty = (obj: Object) => {
+    return Object.keys(obj).length === 0;
   };
 
   return (

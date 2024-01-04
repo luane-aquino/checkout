@@ -1,4 +1,4 @@
-import { BrazilianCurrency } from "../../../../utils/currencyUtils";
+import { formatToBrazilianCurrency } from "../../../../utils/currency";
 import "./styles.scss";
 
 type ProductInfoWithPriceType = {
@@ -29,16 +29,16 @@ const ProductInfoWithPrice = ({
         {oldPrice && (
           <div
             className="price-old"
-            aria-label={`${BrazilianCurrency.format(oldPrice)} reais`}
+            aria-label={`${formatToBrazilianCurrency(oldPrice)} reais`}
             data-testid="price-old"
           >
             <span aria-hidden>R$ </span>
             <p className="price-old__value" aria-hidden>
-              {BrazilianCurrency.format(oldPrice)}
+              {formatToBrazilianCurrency(oldPrice)}
             </p>
           </div>
         )}
-        <p className="price">R$ {BrazilianCurrency.format(price)}</p>
+        <p className="price">R$ {formatToBrazilianCurrency(price)}</p>
       </div>
     </li>
   );
