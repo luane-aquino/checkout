@@ -1,5 +1,16 @@
 import React, { useContext, useState } from "react";
-import { PaymentContextType, PaymentType } from "../common/types";
+
+export type PaymentType = {
+  cardNumber: string;
+  cardHolderName: string;
+  cardValidUntil: string;
+  cvv: string;
+};
+
+export type PaymentContextType = {
+  payment: PaymentType;
+  setPaymentValue: (value: PaymentType) => void;
+};
 
 const data: PaymentType = {
   cardNumber: "",

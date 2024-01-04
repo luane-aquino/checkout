@@ -1,6 +1,11 @@
 import "./styles.scss";
 import { useNavigate } from "react-router-dom";
-import { TabContentItemEnum } from "../../../common/types";
+
+export enum TabContentItemEnum {
+  bag = "bag",
+  payment = "payment",
+  success = "success",
+}
 
 const tabContent = {
   [TabContentItemEnum.bag]: [

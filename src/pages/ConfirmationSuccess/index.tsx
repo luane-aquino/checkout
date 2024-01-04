@@ -1,11 +1,9 @@
 import React from "react";
+import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
 import {
-  CartContextType,
   PaymentContextType,
-  TabContentItemEnum,
-} from "../../common/types";
-import Tabs from "../../components/molecules/Tabs";
-import { usePayment } from "../../store/PaymentDetailsProvider";
+  usePayment,
+} from "../../store/PaymentDetailsProvider";
 import PaymentDetails from "../../components/molecules/PaymentDetails";
 import "./styles.scss";
 import Card from "../../components/atoms/Card";
@@ -14,7 +12,7 @@ import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../store/CartProvider";
+import { CartContextType, useCart } from "../../store/CartProvider";
 
 const ConfirmationSuccess = () => {
   const { payment } = usePayment() as PaymentContextType;

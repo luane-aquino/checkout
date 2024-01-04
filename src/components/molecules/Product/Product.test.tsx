@@ -2,8 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Product } from "./index";
 import Card from "../../atoms/Card";
-import { CartType, ProductType } from "../../../common/types";
 import data from "../../../../public/mocks/productMock.json";
+import { ProductType } from "../../../pages/Bag";
+import { CartType } from "../../../store/CartProvider";
 
 describe("Product", () => {
   it("should show product details", async () => {

@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import "./styles.scss";
-import Tabs from "../../components/molecules/Tabs";
-import {
-  CartContextType,
-  ProductType,
-  TabContentItemEnum,
-} from "../../common/types";
+import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../components/molecules/Product";
@@ -14,7 +9,14 @@ import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../apis";
-import { useCart } from "../../store/CartProvider";
+import { CartContextType, useCart } from "../../store/CartProvider";
+
+export type ProductType = {
+  imageUrl: string;
+  description: string;
+  price: number;
+  oldPrice?: number;
+};
 
 function Bag() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Tabs from "./";
-import { TabContentItemEnum } from "../../../common/types";
+import { TabContentItemEnum } from "./";
 import userEvent from "@testing-library/user-event";
 
 const mockUsedNavigate = jest.fn();

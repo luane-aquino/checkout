@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import PaymentPlan from "./";
 import data from "../../../../public/mocks/productMock.json";
-import { CartType } from "../../../common/types";
+import { CartType } from "../../../store/CartProvider";
 
 describe("PaymentPlan", () => {
   it("should show payment plan details", async () => {

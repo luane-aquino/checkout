@@ -1,5 +1,22 @@
 import React, { useContext, useState } from "react";
-import { CartContextType, CartType } from "../common/types";
+import { ProductType } from "../pages/Bag";
+
+export type CartContextType = {
+  cart: CartType;
+  setCartValue: (value: CartType) => void;
+};
+
+type PaymentPlanType = {
+  total: number;
+  shipping: number;
+  discount: number;
+  subtotal: number;
+};
+
+export type CartType = {
+  paymentPlan: PaymentPlanType;
+  products: ProductType[];
+};
 
 const data: CartType = {
   paymentPlan: {

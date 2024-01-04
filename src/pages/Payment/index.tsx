@@ -1,19 +1,17 @@
 import { useForm, Controller } from "react-hook-form";
-import {
-  CartContextType,
-  PaymentContextType,
-  PaymentType,
-  TabContentItemEnum,
-} from "../../common/types";
 import Card from "../../components/atoms/Card";
-import Tabs from "../../components/molecules/Tabs";
+import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
 import "./styles.scss";
 import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import Button from "../../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
-import { usePayment } from "../../store/PaymentDetailsProvider";
-import { useCart } from "../../store/CartProvider";
+import {
+  PaymentContextType,
+  PaymentType,
+  usePayment,
+} from "../../store/PaymentDetailsProvider";
+import { CartContextType, useCart } from "../../store/CartProvider";
 
 const Payment = () => {
   const {
