@@ -2,10 +2,8 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import Payment from "./";
 import userEvent from "@testing-library/user-event";
-import PaymentDetailsProvider, {
-  usePayment,
-} from "../../store/PaymentDetailsProvider";
-import CartProvider from "../../store/CartProvider";
+import { usePayment } from "../../store/PaymentDetailsProvider";
+import { useCart } from "../../store/CartProvider";
 
 // Mocking the store hooks
 jest.mock("../../store/PaymentDetailsProvider");
@@ -21,15 +19,16 @@ jest.mock("react-router-dom", () => ({
 describe("Payment", () => {
   it("should render Payment page", () => {
     (usePayment as any).mockReturnValue({
-      payment: {
-        cardNumber: "1234567890123456",
-        cardHolderName: "John Doe",
-        cardValidUntil: "12/2023",
+      setPaymentValue: jest.fn(),
+    });
+    (useCart as any).mockReturnValue({
+      cart: {
+        products: [{ imageUrl: "example.jpg", description: "Product 1" }],
+        paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
       },
     });
     render(<Payment />);
 
-    // Assert that the necessary elements are present on the page
     expect(screen.getByRole("tablist")).toBeVisible();
     expect(
       screen.getByRole("heading", { name: "Cartão de crédito", level: 1 }),
@@ -40,14 +39,17 @@ describe("Payment", () => {
     ).toBeVisible();
   });
 
-  it.skip("should go to /confirmation", async () => {
-    render(
-      <PaymentDetailsProvider>
-        <CartProvider>
-          <Payment />
-        </CartProvider>
-      </PaymentDetailsProvider>,
-    );
+  it("should go to /confirmation", async () => {
+    (usePayment as any).mockReturnValue({
+      setPaymentValue: jest.fn(),
+    });
+    (useCart as any).mockReturnValue({
+      cart: {
+        products: [{ imageUrl: "example.jpg", description: "Product 1" }],
+        paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
+      },
+    });
+    render(<Payment />);
 
     const numberElement = screen.getByLabelText("Número");
     userEvent.type(numberElement, "1234567812345678");
@@ -71,14 +73,17 @@ describe("Payment", () => {
     );
   });
 
-  it.skip("should not go to /confirmation when inputs are empty", async () => {
-    render(
-      <PaymentDetailsProvider>
-        <CartProvider>
-          <Payment />
-        </CartProvider>
-      </PaymentDetailsProvider>,
-    );
+  it("should not go to /confirmation when inputs are empty", async () => {
+    (usePayment as any).mockReturnValue({
+      setPaymentValue: jest.fn(),
+    });
+    (useCart as any).mockReturnValue({
+      cart: {
+        products: [{ imageUrl: "example.jpg", description: "Product 1" }],
+        paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
+      },
+    });
+    render(<Payment />);
 
     const buttonSubmit = screen.getByRole("button", {
       name: "Finalizar pedido",
