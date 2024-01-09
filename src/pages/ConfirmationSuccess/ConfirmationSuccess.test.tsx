@@ -18,14 +18,14 @@ jest.mock("../../store/CartProvider");
 
 describe("ConfirmationSuccess", () => {
   it("should render ConfirmationSuccess page correctly with provided data", async () => {
-    (usePayment as any).mockReturnValue({
+    (usePayment as jest.Mock).mockReturnValue({
       payment: {
         cardNumber: "1234567890123456",
         cardHolderName: "John Doe",
         cardValidUntil: "12/2023",
       },
     });
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [{ imageUrl: "example.jpg", description: "Product 1" }],
         paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
@@ -56,14 +56,14 @@ describe("ConfirmationSuccess", () => {
   });
 
   it("should navigate to /Bag when button is clicked", () => {
-    (usePayment as any).mockReturnValue({
+    (usePayment as jest.Mock).mockReturnValue({
       payment: {
         cardNumber: "1234567890123456",
         cardHolderName: "John Doe",
         cardValidUntil: "12/2023",
       },
     });
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [{ imageUrl: "example.jpg", description: "Product 1" }],
         paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
