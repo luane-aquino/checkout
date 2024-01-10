@@ -17,6 +17,9 @@ const Payment = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setError,
+    clearErrors,
+    getValues,
   } = useForm<PaymentType>({
     defaultValues: {
       cardNumber: "",
@@ -46,16 +49,42 @@ const Payment = () => {
     return Object.keys(obj).length === 0;
   };
 
+  const isExpiryDateValid = (date: string) => {
+    if (date.length === 7) {
+      const parts = date.split("/");
+      const userEnteredMonth = parseInt(parts[0]);
+      const userEnteredYear = parseInt(parts[1]);
+      const currentMonth = new Date().getMonth() + 1;
+      const currentYear = new Date().getFullYear();
+      const userEnteredMonthIsValid =
+        userEnteredMonth >= 1 && userEnteredMonth <= 12;
+      if (
+        userEnteredMonth >= currentMonth &&
+        userEnteredMonthIsValid &&
+        userEnteredYear >= currentYear
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const onSubmit = (data: PaymentType) => {
+    if (isExpiryDateValid(getValues("cardValidUntil"))) {
+      clearErrors("cardValidUntil");
+      setPaymentValue(data);
+      navigate("/confirmation");
+    } else {
+      setError("cardValidUntil", {
+        message: "mês ou ano inválido",
+      });
+    }
+  };
+
   return (
     <div className="Payment">
       <Tabs path={TabContentItemEnum.payment} />
-      <form
-        onSubmit={handleSubmit((data) => {
-          setPaymentValue(data);
-          navigate("/confirmation");
-        })}
-        className="Payment__form-wrapper"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="Payment__form-wrapper">
         <Card>
           <h1 className="Payment__form-title">Cartão de crédito</h1>
           <div className="input-wrapper input-wrapper--fullwidth">
@@ -127,7 +156,7 @@ const Payment = () => {
               <Controller
                 name="cardValidUntil"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: "insira uma data válida" }}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -148,7 +177,7 @@ const Payment = () => {
               />
               {errors.cardValidUntil && (
                 <p className="input-wrapper__error-message">
-                  insira uma data válida
+                  {errors.cardValidUntil.message}
                 </p>
               )}
             </div>
