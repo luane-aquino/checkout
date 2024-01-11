@@ -18,10 +18,10 @@ jest.mock("react-router-dom", () => ({
 
 describe("Payment", () => {
   it("should render Payment page", () => {
-    (usePayment as any).mockReturnValue({
+    (usePayment as jest.Mock).mockReturnValue({
       setPaymentValue: jest.fn(),
     });
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [{ imageUrl: "example.jpg", description: "Product 1" }],
         paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
@@ -40,10 +40,10 @@ describe("Payment", () => {
   });
 
   it("should go to /confirmation", async () => {
-    (usePayment as any).mockReturnValue({
+    (usePayment as jest.Mock).mockReturnValue({
       setPaymentValue: jest.fn(),
     });
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [{ imageUrl: "example.jpg", description: "Product 1" }],
         paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },
@@ -74,10 +74,10 @@ describe("Payment", () => {
   });
 
   it("should not go to /confirmation when inputs are empty", async () => {
-    (usePayment as any).mockReturnValue({
+    (usePayment as jest.Mock).mockReturnValue({
       setPaymentValue: jest.fn(),
     });
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [{ imageUrl: "example.jpg", description: "Product 1" }],
         paymentPlan: { total: 100, shipping: 10, discount: 5, subtotal: 105 },

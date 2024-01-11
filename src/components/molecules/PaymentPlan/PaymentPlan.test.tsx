@@ -8,7 +8,7 @@ jest.mock("../../../store/CartProvider");
 
 describe("PaymentPlan", () => {
   it("should show payment plan details", async () => {
-    (useCart as any).mockReturnValue({
+    (useCart as jest.Mock).mockReturnValue({
       cart: {
         products: [
           { imageUrl: "example.jpg", description: "Product 1" },
