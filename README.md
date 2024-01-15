@@ -5,7 +5,7 @@ This is a simple checkout app that shows 3 steps (cart, payment and confirmation
 - React
 - Typescript
 - HTML
-- CSS
+- scss
 - react-query
 - react-hook-form
 - react-testing-library and Jest
