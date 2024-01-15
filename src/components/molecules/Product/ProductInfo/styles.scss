@@ -1,0 +1,12 @@
+.ProductInfo {
+  &__list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__image {
+    width: 60px;
+    height: 60px;
+  }
+}
