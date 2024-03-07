@@ -11,6 +11,8 @@ import {
   PaymentType,
   usePayment,
 } from "../../store/PaymentDetailsProvider";
+import { useMutation } from "@tanstack/react-query";
+import { sendPayment } from "../../apis";
 
 const Payment = () => {
   const {
@@ -30,6 +32,10 @@ const Payment = () => {
   });
   const navigate = useNavigate();
   const { setPaymentValue } = usePayment() as PaymentContextType;
+  // TODO refact
+  const mutation = useMutation({
+    mutationFn: (payment: any) => sendPayment(payment),
+  });
 
   const formatCardNumber = (value: string) => {
     return value
@@ -73,6 +79,8 @@ const Payment = () => {
     if (isExpiryDateValid(getValues("cardValidUntil"))) {
       clearErrors("cardValidUntil");
       setPaymentValue(data);
+      // envio pro back
+      mutation.mutate(data);
       navigate("/confirmation");
     } else {
       setError("cardValidUntil", {
