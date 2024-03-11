@@ -5,7 +5,8 @@ const app = express();
 const port = 5000;
 app.use(cors())
 
-app.get('/cart', (req, res) => {
+app.get('/api/customer/:document/cart', (req, res) => {
+  console.log('***[param]',req.params.document);
   const data = {
     "paymentPlan": {
       "total": 624.8,
@@ -37,7 +38,7 @@ app.get('/cart', (req, res) => {
   res.json(data);
 });
 
-app.post('/payment', (req, res) => {
+app.post('/api/customer/:document/payment', (req, res) => {
   console.log('***[req]',req);
   res.send('Data received!')
 });
