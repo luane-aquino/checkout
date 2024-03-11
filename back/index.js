@@ -1,12 +1,15 @@
 const express = require('express');
-var cors = require('cors')
+const cors = require('cors')
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 5000;
+
+app.use(bodyParser.json()); // Middleware to parse JSON bodies
 app.use(cors())
 
 app.get('/api/customer/:document/cart', (req, res) => {
-  console.log('***[param]',req.params.document);
+  // console.log('***[param]',req.params.document);
   const data = {
     "paymentPlan": {
       "total": 624.8,
@@ -38,8 +41,8 @@ app.get('/api/customer/:document/cart', (req, res) => {
   res.json(data);
 });
 
-app.post('/api/customer/:document/payment', (req, res) => {
-  console.log('***[req]',req);
+app.post('/api/customer/:document/checkout', (req, res) => {
+  console.log('***[req]',req.body);
   res.send('Data received!')
 });
 

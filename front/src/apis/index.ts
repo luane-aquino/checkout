@@ -10,7 +10,7 @@ export const getProducts = async () => {
 // TODO refact any
 export const sendPayment = async (payment: any) => {
   const res = await fetch(
-    `http://localhost:5000/api/customer/${customerDocument}/payment`,
+    `http://localhost:5000/api/customer/${customerDocument}/checkout`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
