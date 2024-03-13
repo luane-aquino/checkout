@@ -12,7 +12,7 @@ import {
   usePayment,
 } from "../../store/PaymentDetailsProvider";
 import { useMutation } from "@tanstack/react-query";
-import { sendPayment } from "../../apis";
+import { customerDocument, sendPayment } from "../../apis";
 import { CartContextType, useCart } from "../../store/CartProvider";
 
 const Payment = () => {
@@ -34,7 +34,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { cart } = useCart() as CartContextType;
   const { setPaymentValue } = usePayment() as PaymentContextType;
-  // TODO refact
+  // TODO refact type
   const mutation = useMutation({
     mutationFn: (payment: any) => sendPayment(payment),
   });
@@ -78,10 +78,13 @@ const Payment = () => {
   };
 
   // TODO refact type
-  const getPayload = (data: PaymentType, products: any[]) => {
+  const getPayload = (data: PaymentType) => {
     return {
+      createdAt: new Date().toISOString(),
+      document: customerDocument,
       payment: data,
-      products,
+      products: cart.products,
+      paymentPlan: cart.paymentPlan,
     };
   };
 
@@ -89,9 +92,7 @@ const Payment = () => {
     if (isExpiryDateValid(getValues("cardValidUntil"))) {
       clearErrors("cardValidUntil");
       setPaymentValue(data);
-      const payload = getPayload(data, cart.products);
-      console.log("***[payload]", payload);
-      // envio pro back
+      const payload = getPayload(data);
       mutation.mutate(payload);
       navigate("/confirmation");
     } else {

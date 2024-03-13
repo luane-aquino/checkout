@@ -1,4 +1,4 @@
-const customerDocument = "12345678900";
+export const customerDocument = "12345678900";
 
 export const getProducts = async () => {
   const res = await fetch(
