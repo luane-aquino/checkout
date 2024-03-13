@@ -19,7 +19,7 @@ let orders = [
   {
     orderId: 1011,
     document: "12345678900",
-    createdAt: "2024-03-13T04:45:34.672Z",
+    createdAt: "2024-03-12T04:45:34.672Z",
     products: [],
     payment: {},
     paymentPlan: {},
@@ -67,7 +67,13 @@ const getDate = (dateISOStringFormat) => {
   return dateISOStringFormat.split("T")[0];
 };
 
+const purchaseDateIsIncorrect = (purchaseDate) => {
+  const currentDate = getDate(new Date().toISOString());
+  return getDate(purchaseDate) !== currentDate;
+};
+
 module.exports = {
   orders,
   canMakeNewPurchase,
+  purchaseDateIsIncorrect,
 };

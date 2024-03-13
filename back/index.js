@@ -1,7 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { canMakeNewPurchase, orders } = require("./helpers");
+const {
+  canMakeNewPurchase,
+  orders,
+  purchaseDateIsIncorrect,
+} = require("./helpers");
 
 const app = express();
 const port = 5000;
@@ -48,9 +52,15 @@ app.get("/api/customer/:document/cart", (req, res) => {
 });
 
 app.post("/api/customer/:document/checkout", (req, res) => {
-  console.log("***[req]", req.body);
+  // console.log("***[req]", req.body);
   const newOrderDate = req.body.createdAt;
   const document = req.body.document;
+
+  if (purchaseDateIsIncorrect(newOrderDate)) {
+    return res
+      .status(403)
+      .send("Data da compra não pode ser maior ou menor do que a data atual.");
+  }
 
   if (!canMakeNewPurchase(document, newOrderDate)) {
     return res.status(403).send("Limite de compras excedido.");
