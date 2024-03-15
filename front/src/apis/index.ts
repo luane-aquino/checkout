@@ -9,7 +9,7 @@ export const getProducts = async () => {
 
 // TODO refact any
 export const sendPayment = async (payment: any) => {
-  const res = await fetch(
+  const response = await fetch(
     `http://localhost:5000/api/customer/${customerDocument}/checkout`,
     {
       method: "POST",
@@ -17,5 +17,10 @@ export const sendPayment = async (payment: any) => {
       body: JSON.stringify(payment),
     },
   );
-  return res.json();
+
+  if (!response.ok) {
+    throw await response.json();
+  }
+
+  return await response.json();
 };

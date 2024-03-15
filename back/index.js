@@ -59,15 +59,18 @@ app.post("/api/customer/:document/checkout", (req, res) => {
   if (purchaseDateIsIncorrect(newOrderDate)) {
     return res
       .status(403)
-      .send("Data da compra não pode ser maior ou menor do que a data atual.");
+      .send({
+        message:
+          "Data da compra não pode ser maior ou menor do que a data atual.",
+      });
   }
 
   if (!canMakeNewPurchase(document, newOrderDate)) {
-    return res.status(403).send("Limite de compras excedido.");
+    return res.status(403).send({ message: "Limite de compras excedido." });
   }
 
   orders.push(req.body);
-  res.send("Compra realizada com sucesso.");
+  res.status(201).send({ message: "Compra realizada com sucesso." });
 });
 
 app.listen(port, () => {

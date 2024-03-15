@@ -14,6 +14,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { customerDocument, sendPayment } from "../../apis";
 import { CartContextType, useCart } from "../../store/CartProvider";
+import Loading from "../../components/molecules/Loading";
 
 const Payment = () => {
   const {
@@ -37,6 +38,12 @@ const Payment = () => {
   // TODO refact type
   const mutation = useMutation({
     mutationFn: (payment: any) => sendPayment(payment),
+    onError(error) {
+      navigate("/error", { state: { errorMessage: error.message } });
+    },
+    onSuccess() {
+      navigate("/confirmation");
+    },
   });
 
   const formatCardNumber = (value: string) => {
@@ -94,13 +101,16 @@ const Payment = () => {
       setPaymentValue(data);
       const payload = getPayload(data);
       mutation.mutate(payload);
-      navigate("/confirmation");
     } else {
       setError("cardValidUntil", {
         message: "mês ou ano inválido",
       });
     }
   };
+
+  if (mutation.isPending) {
+    return <Loading />;
+  }
 
   return (
     <div className="Payment">
