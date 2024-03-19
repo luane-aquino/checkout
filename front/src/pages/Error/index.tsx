@@ -11,7 +11,7 @@ const Error = () => {
   };
 
   return (
-    <div className="error">
+    <div className="Error">
       <div className="wrapper">
         <div className="content">
           <img
