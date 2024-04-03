@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./styles.scss";
 import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
 import Button from "../../components/atoms/Button";
@@ -9,7 +9,8 @@ import Container from "../../components/atoms/Container";
 import PaymentPlan from "../../components/molecules/PaymentPlan";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../apis";
-import { CartContextType, useCart } from "../../store/CartProvider";
+import { CartContextType, CartType, useCart } from "../../store/CartProvider";
+import { normalizeData } from "../../utils/helpers";
 
 export type ProductType = {
   imageUrl: string;
@@ -21,6 +22,7 @@ export type ProductType = {
 function Bag() {
   const navigate = useNavigate();
   const { setCartValue } = useCart() as CartContextType;
+  const [cart, setCart] = useState<CartType>();
   const { data } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
@@ -32,9 +34,13 @@ function Bag() {
 
   useEffect(() => {
     if (data) {
-      setCartValue(data);
+      const normalizedData = normalizeData(data);
+      setCartValue(normalizedData);
+      setCart(normalizedData);
     }
-  }, [data, setCartValue]);
+    // O eslint esta reclamando que esta faltando a dependencia 'setCartValue' no useEffect, porem
+    // se adiciono essa dependencia esse effect acaba em um loop infinito
+  }, [data]);
 
   return (
     <div className="Bag">
@@ -42,7 +48,7 @@ function Bag() {
       <div className="products-wrapper">
         <Card>
           <Product.Root>
-            {data?.products.map((item: ProductType, index: number) => (
+            {cart?.products.map((item: ProductType, index: number) => (
               <Product.InfoWithPrice
                 imageUrl={item.imageUrl}
                 description={item.description}
