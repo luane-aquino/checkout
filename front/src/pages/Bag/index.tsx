@@ -24,7 +24,7 @@ function Bag() {
   const { setCartValue } = useCart() as CartContextType;
   const [cart, setCart] = useState<CartType>();
   const { data } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["cart"],
     queryFn: getProducts,
   });
 
@@ -38,9 +38,7 @@ function Bag() {
       setCartValue(normalizedData);
       setCart(normalizedData);
     }
-    // O eslint esta reclamando que esta faltando a dependencia 'setCartValue' no useEffect, porem
-    // se adiciono essa dependencia esse effect acaba em um loop infinito
-  }, [data]);
+  }, [data, setCartValue]);
 
   return (
     <div className="Bag">

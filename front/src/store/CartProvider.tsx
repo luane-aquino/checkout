@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { ProductType } from "../pages/Bag";
 
 export type CartContextType = {
@@ -58,9 +58,9 @@ type CartProviderProps = {
 export default function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartType>(data);
 
-  const setCartValue = (value: CartType) => {
+  const setCartValue = useCallback((value: CartType) => {
     setCart(value);
-  };
+  }, []);
 
   return (
     <CartContext.Provider value={{ cart, setCartValue }}>
