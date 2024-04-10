@@ -1,47 +1,3 @@
-// TODO this should be in the database
-let orders = [
-  {
-    orderId: 123,
-    document: "12345678900",
-    createdAt: "2024-03-19T04:45:34.672Z",
-    products: [],
-    payment: {},
-    paymentPlan: {},
-  },
-  {
-    orderId: 1234,
-    document: "12345678900",
-    createdAt: "2024-03-5T04:45:34.672Z",
-    products: [],
-    payment: {},
-    paymentPlan: {},
-  },
-  {
-    orderId: 1011,
-    document: "12345678900",
-    createdAt: "2024-03-19T04:45:34.672Z",
-    products: [],
-    payment: {},
-    paymentPlan: {},
-  },
-  {
-    orderId: 12345,
-    document: "12345678900",
-    createdAt: "2024-03-19T04:45:34.672Z",
-    products: [],
-    payment: {},
-    paymentPlan: {},
-  },
-  {
-    orderId: 2324,
-    document: "00000000000",
-    createdAt: "2024-02-06T04:45:34.672Z",
-    products: [],
-    payment: {},
-    paymentPlan: {},
-  },
-];
-
 const PURCHASE_LIMIT_PER_DAY = 3;
 
 const canMakeNewPurchase = (customerDocument, dateOfPurchase) => {
@@ -73,7 +29,6 @@ const purchaseDateIsIncorrect = (purchaseDate) => {
 };
 
 module.exports = {
-  orders,
   canMakeNewPurchase,
   purchaseDateIsIncorrect,
 };

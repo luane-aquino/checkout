@@ -2,12 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const {
-  canMakeNewPurchase,
-  orders,
-  purchaseDateIsIncorrect,
-} = require("./helpers");
-const { getCartByUser } = require("./database");
+const { canMakeNewPurchase, purchaseDateIsIncorrect } = require("./helpers");
+const { getCartByUser, addOrder } = require("./database");
 
 const app = express();
 const port = 5000;
@@ -22,7 +18,7 @@ app.get("/api/customer/:document/cart", async (req, res) => {
 });
 
 app.post("/api/customer/:document/checkout", (req, res) => {
-  const newOrderDate = req.body.createdAt;
+  const newOrderDate = req.body.created_at;
   const document = req.body.document;
 
   if (purchaseDateIsIncorrect(newOrderDate)) {
@@ -36,7 +32,7 @@ app.post("/api/customer/:document/checkout", (req, res) => {
     return res.status(403).send({ message: "Limite de compras excedido." });
   }
 
-  orders.push(req.body);
+  addOrder(req.body);
   res.status(201).send({ message: "Compra realizada com sucesso." });
 });
 

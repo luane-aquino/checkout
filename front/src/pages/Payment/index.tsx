@@ -86,12 +86,26 @@ const Payment = () => {
 
   // TODO refact type
   const getPayload = (data: PaymentType) => {
+    const normalizedProducts = cart.products.map((product) => {
+      return {
+        description: product.description,
+        image_url: product.imageUrl,
+        price: product.price,
+        price_without_discount: product.oldPrice,
+      };
+    });
+    const normalizedPayment = {
+      card_holder_name: data.cardHolderName,
+      card_number: data.cardNumber,
+      card_valid_until: data.cardValidUntil,
+      cvv: data.cvv,
+    };
     return {
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
       document: customerDocument,
-      payment: data,
-      products: cart.products,
-      paymentPlan: cart.paymentPlan,
+      products: normalizedProducts,
+      payment: normalizedPayment,
+      payment_plan: cart.paymentPlan,
     };
   };
 

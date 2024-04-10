@@ -19,6 +19,20 @@ const getCartByUser = async (document) => {
   }
 };
 
+const addOrder = async (order) => {
+  try {
+    client = new MongoClient(uri);
+    const database = client.db("online_store");
+    const carts = database.collection("orders");
+
+    await carts.insertOne(order);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+};
+
 module.exports = {
   getCartByUser,
+  addOrder,
 };
