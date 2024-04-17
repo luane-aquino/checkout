@@ -65,23 +65,26 @@ const Payment = () => {
   };
 
   const isExpiryDateValid = (date: string) => {
-    if (date.length === 7) {
-      const parts = date.split("/");
-      const userEnteredMonth = parseInt(parts[0]);
-      const userEnteredYear = parseInt(parts[1]);
-      const currentMonth = new Date().getMonth() + 1;
-      const currentYear = new Date().getFullYear();
-      const userEnteredMonthIsValid =
-        userEnteredMonth >= 1 && userEnteredMonth <= 12;
-      if (
-        userEnteredMonth >= currentMonth &&
-        userEnteredMonthIsValid &&
-        userEnteredYear >= currentYear
-      ) {
-        return true;
-      }
+    if (date.length !== 7) {
+      return false;
     }
-    return false;
+    const parts = date.split("/");
+    const userEnteredMonth = parseInt(parts[0]);
+    const userEnteredYear = parseInt(parts[1]);
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    const userEnteredMonthIsValid =
+      userEnteredMonth >= 1 && userEnteredMonth <= 12;
+    if (userEnteredYear === currentYear && userEnteredMonth < currentMonth) {
+      return false;
+    }
+    if (
+      userEnteredMonth >= currentMonth &&
+      userEnteredMonthIsValid &&
+      userEnteredYear >= currentYear
+    ) {
+      return true;
+    }
   };
 
   // TODO refact type
