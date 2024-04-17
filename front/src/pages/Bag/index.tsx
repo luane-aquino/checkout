@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../apis";
 import { CartContextType, CartType, useCart } from "../../store/CartProvider";
 import { normalizeData } from "../../utils/helpers";
+import Loading from "../../components/molecules/Loading";
 
 export type ProductType = {
   imageUrl: string;
@@ -23,7 +24,7 @@ function Bag() {
   const navigate = useNavigate();
   const { setCartValue } = useCart() as CartContextType;
   const [cart, setCart] = useState<CartType>();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: getProducts,
   });
@@ -39,6 +40,10 @@ function Bag() {
       setCart(normalizedData);
     }
   }, [data, setCartValue]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="Bag">
