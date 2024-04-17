@@ -1,26 +1,29 @@
+const { getUserOrderCountByDate } = require("./database");
+
 const PURCHASE_LIMIT_PER_DAY = 3;
 
-const canMakeNewPurchase = (customerDocument, dateOfPurchase) => {
-  const customerPurchases = orders.filter(
-    (purchase) => purchase.document === customerDocument,
-  );
-  // user has few purchases in total, so it means can make new purchase
-  if (customerPurchases.length < PURCHASE_LIMIT_PER_DAY) {
-    return true;
-  }
-  // user has many purchases, so we need to check how many purchases per date
-  let purchasesQuantity = 0;
-  for (const order of customerPurchases) {
-    if (getDate(dateOfPurchase) === getDate(order.createdAt)) {
-      ++purchasesQuantity;
+const canMakeNewPurchase = async (customerDocument, dateOfPurchase) => {
+  try {
+    const count = await getUserOrderCountByDate(customerDocument);
+    if ((count === undefined) | (count === null)) {
+      return false;
     }
-    if (purchasesQuantity >= PURCHASE_LIMIT_PER_DAY) break;
+    // user has few purchases in total, so it means can make new purchase
+    if (count >= PURCHASE_LIMIT_PER_DAY) {
+      return false;
+    }
+    return true;
+  } catch {
+    console.log("***[Error in canMakeNewPurchase]");
+    return false;
   }
-  return purchasesQuantity < PURCHASE_LIMIT_PER_DAY;
 };
 
 const getDate = (dateISOStringFormat) => {
-  return dateISOStringFormat.split("T")[0];
+  if (dateISOStringFormat) {
+    return dateISOStringFormat.split("T")[0];
+  }
+  return "";
 };
 
 const purchaseDateIsIncorrect = (purchaseDate) => {
@@ -31,4 +34,5 @@ const purchaseDateIsIncorrect = (purchaseDate) => {
 module.exports = {
   canMakeNewPurchase,
   purchaseDateIsIncorrect,
+  getUserOrderCountByDate,
 };

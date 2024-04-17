@@ -1,18 +1,52 @@
 const { MongoClient } = require("mongodb");
 
 const uri = process.env.MONGODB_STRING_CONNECTION;
-let client = undefined;
+const client = new MongoClient(uri);
 
 const getCartByUser = async (document) => {
   try {
-    client = new MongoClient(uri);
+    const client = new MongoClient(uri);
+    // Use connect method to connect to the server
+    await client.connect();
     const database = client.db("online_store");
-    const carts = database.collection("carts");
-
+    const cartsCollection = database.collection("carts");
     const query = { "customer.document": document };
-    const cart = await carts.findOne(query);
-
+    const cart = await cartsCollection.findOne(query);
     return cart;
+  } catch (error) {
+    console.log("***[Error in getCartByUser]");
+    if (error instanceof MongoServerError) {
+      console.log(`Error worth logging: ${error}`); // special case for some reason
+    }
+    throw error; // still want to crash
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+};
+
+const getUserOrderCountByDate = async (document) => {
+  try {
+    const client = new MongoClient(uri);
+    await client.connect();
+    const database = client.db("online_store");
+    const ordersCollection = database.collection("orders");
+
+    // Get today's date at midnight in local time zone
+    let start = new Date();
+    start.setHours(0, 0, 0, 0);
+
+    // Get tomorrow's date at midnight in local time zone
+    let end = new Date(start);
+    end.setDate(end.getDate() + 1);
+
+    const query = {
+      document: document,
+      created_at: { $gte: start.toISOString(), $lt: end.toISOString() },
+    };
+    return await ordersCollection.countDocuments(query);
+  } catch {
+    console.log("***[Error in getUserOrderCountByDate]");
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
@@ -21,11 +55,14 @@ const getCartByUser = async (document) => {
 
 const addOrder = async (order) => {
   try {
-    client = new MongoClient(uri);
+    const client = new MongoClient(uri);
+    await client.connect();
     const database = client.db("online_store");
-    const carts = database.collection("orders");
+    const ordersCollection = database.collection("orders");
 
-    await carts.insertOne(order);
+    await ordersCollection.insertOne(order);
+  } catch {
+    console.log("***[Error in addOrder]");
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
@@ -34,5 +71,6 @@ const addOrder = async (order) => {
 
 module.exports = {
   getCartByUser,
+  getUserOrderCountByDate,
   addOrder,
 };
