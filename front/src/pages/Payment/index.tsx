@@ -78,11 +78,7 @@ const Payment = () => {
     if (userEnteredYear === currentYear && userEnteredMonth < currentMonth) {
       return false;
     }
-    if (
-      userEnteredMonth >= currentMonth &&
-      userEnteredMonthIsValid &&
-      userEnteredYear >= currentYear
-    ) {
+    if (userEnteredMonthIsValid && userEnteredYear >= currentYear) {
       return true;
     }
   };
