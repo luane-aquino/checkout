@@ -1,4 +1,4 @@
-import Card from "../../atoms/Card";
+import Card from "components/atoms/Card";
 import "./styles.scss";
 
 type PaymentDetailsType = {

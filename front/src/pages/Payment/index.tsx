@@ -1,20 +1,20 @@
 import { useForm, Controller } from "react-hook-form";
-import Card from "../../components/atoms/Card";
-import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
+import Card from "components/atoms/Card";
+import Tabs, { TabContentItemEnum } from "components/molecules/Tabs";
 import "./styles.scss";
-import Container from "../../components/atoms/Container";
-import PaymentPlan from "../../components/molecules/PaymentPlan";
-import Button from "../../components/atoms/Button";
+import Container from "components/atoms/Container";
+import PaymentPlan from "components/molecules/PaymentPlan";
+import Button from "components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import {
   PaymentContextType,
   PaymentType,
   usePayment,
-} from "../../store/PaymentDetailsProvider";
+} from "store/PaymentDetailsProvider";
 import { useMutation } from "@tanstack/react-query";
-import { customerDocument, sendPayment } from "../../apis";
-import { CartContextType, useCart } from "../../store/CartProvider";
-import Loading from "../../components/molecules/Loading";
+import { customerDocument, sendPayment } from "apis";
+import { CartContextType, useCart } from "store/CartProvider";
+import Loading from "components/molecules/Loading";
 
 const Payment = () => {
   const {

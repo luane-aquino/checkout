@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import "./styles.scss";
-import Tabs, { TabContentItemEnum } from "../../components/molecules/Tabs";
-import Button from "../../components/atoms/Button";
+import Tabs, { TabContentItemEnum } from "components/molecules/Tabs";
+import Button from "components/atoms/Button";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../../components/molecules/Product";
-import Card from "../../components/atoms/Card";
-import Container from "../../components/atoms/Container";
-import PaymentPlan from "../../components/molecules/PaymentPlan";
+import { Product } from "components/molecules/Product";
+import Card from "components/atoms/Card";
+import Container from "components/atoms/Container";
+import PaymentPlan from "components/molecules/PaymentPlan";
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../apis";
-import { CartContextType, CartType, useCart } from "../../store/CartProvider";
-import { normalizeData } from "../../utils/helpers";
-import Loading from "../../components/molecules/Loading";
+import { getProducts } from "apis";
+import { CartContextType, CartType, useCart } from "store/CartProvider";
+import { normalizeData } from "utils/helpers";
+import Loading from "components/molecules/Loading";
 
 export type ProductType = {
   imageUrl: string;

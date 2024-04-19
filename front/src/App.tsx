@@ -1,9 +1,9 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PaymentDetailsProvider from "./store/PaymentDetailsProvider";
+import PaymentDetailsProvider from "store/PaymentDetailsProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CartProvider from "./store/CartProvider";
-import { routes } from "./routes";
+import CartProvider from "store/CartProvider";
+import { routes } from "routes";
 
 const App = () => {
   const queryClient = new QueryClient();

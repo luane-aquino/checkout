@@ -1,4 +1,4 @@
-import { CartType } from "../store/CartProvider";
+import { CartType } from "store/CartProvider";
 
 // TODO refact any
 export const normalizeData = (data: any): CartType => {

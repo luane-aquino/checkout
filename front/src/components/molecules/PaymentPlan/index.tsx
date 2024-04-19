@@ -1,5 +1,5 @@
-import { CartContextType, useCart } from "../../../store/CartProvider";
-import { formatToBrazilianCurrency } from "../../../utils/currency";
+import { CartContextType, useCart } from "store/CartProvider";
+import { formatToBrazilianCurrency } from "utils/currency";
 import "./styles.scss";
 
 const PaymentPlan = () => {
