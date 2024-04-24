@@ -125,6 +125,15 @@ const Payment = () => {
     return <Loading />;
   }
 
+  if (mutation.error) {
+    navigate("/error", {
+      state: {
+        errorMessage: "Sorry, something is wrong.. try again later",
+        buttonText: "Retry",
+      },
+    });
+  }
+
   return (
     <div className="Payment">
       <Tabs path={TabContentItemEnum.payment} />
