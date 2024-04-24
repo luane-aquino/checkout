@@ -24,7 +24,7 @@ function Bag() {
   const navigate = useNavigate();
   const { setCartValue } = useCart() as CartContextType;
   const [cart, setCart] = useState<CartType>();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["cart"],
     queryFn: getProducts,
   });
@@ -43,6 +43,15 @@ function Bag() {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (error) {
+    navigate("/error", {
+      state: {
+        errorMessage: "Sorry, something is wrong.. try again later",
+        buttonText: "Retry",
+      },
+    });
   }
 
   return (

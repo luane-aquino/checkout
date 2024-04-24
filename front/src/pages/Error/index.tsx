@@ -23,7 +23,7 @@ const Error = () => {
           <p className="content__text">{location?.state?.errorMessage}</p>
         </div>
         <Button
-          text="Voltar ao inicio do protótipo"
+          text={location.state.buttonText ?? "Voltar ao inicio do protótipo"}
           styleSecondary
           handleClick={goToHomepage}
         />
