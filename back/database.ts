@@ -1,12 +1,12 @@
 import { MongoClient, MongoServerError } from "mongodb";
+import { OrderType } from "./models/order";
 
 const uri = process.env.MONGODB_STRING_CONNECTION;
 const client = new MongoClient(uri!);
 
-export const getCartByUser = async (document: any) => {
+export const getCartByUser = async (document: string) => {
   try {
     const client = new MongoClient(uri!);
-    // Use connect method to connect to the server
     await client.connect();
     const database = client.db("online_store");
     const cartsCollection = database.collection("carts");
@@ -25,7 +25,7 @@ export const getCartByUser = async (document: any) => {
   }
 };
 
-export const getUserOrderCountByDate = async (document: any) => {
+export const getUserOrderCountByDate = async (document: string) => {
   try {
     const client = new MongoClient(uri!);
     await client.connect();
@@ -53,7 +53,7 @@ export const getUserOrderCountByDate = async (document: any) => {
   }
 };
 
-export const addOrder = async (order: any) => {
+export const addOrder = async (order: OrderType) => {
   try {
     const client = new MongoClient(uri!);
     await client.connect();
@@ -68,9 +68,3 @@ export const addOrder = async (order: any) => {
     await client.close();
   }
 };
-
-// module.exports = {
-//   getCartByUser,
-//   getUserOrderCountByDate,
-//   addOrder,
-// };
