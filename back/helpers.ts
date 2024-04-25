@@ -1,11 +1,14 @@
-const { getUserOrderCountByDate } = require("./database");
+import { getUserOrderCountByDate } from "./database";
 
 const PURCHASE_LIMIT_PER_DAY = 3;
 
-const canMakeNewPurchase = async (customerDocument, dateOfPurchase) => {
+export const canMakeNewPurchase = async (
+  customerDocument: any,
+  dateOfPurchase: any,
+) => {
   try {
     const count = await getUserOrderCountByDate(customerDocument);
-    if ((count === undefined) | (count === null)) {
+    if (count === undefined || count === null) {
       return false;
     }
     // user has few purchases in total, so it means can make new purchase
@@ -19,20 +22,20 @@ const canMakeNewPurchase = async (customerDocument, dateOfPurchase) => {
   }
 };
 
-const getDate = (dateISOStringFormat) => {
+export const getDate = (dateISOStringFormat: any) => {
   if (dateISOStringFormat) {
     return dateISOStringFormat.split("T")[0];
   }
   return "";
 };
 
-const purchaseDateIsIncorrect = (purchaseDate) => {
+export const purchaseDateIsIncorrect = (purchaseDate: any) => {
   const currentDate = getDate(new Date().toISOString());
   return getDate(purchaseDate) !== currentDate;
 };
 
-module.exports = {
-  canMakeNewPurchase,
-  purchaseDateIsIncorrect,
-  getUserOrderCountByDate,
-};
+// module.exports = {
+//   canMakeNewPurchase,
+//   purchaseDateIsIncorrect,
+//   getUserOrderCountByDate,
+// };

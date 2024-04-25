@@ -1,11 +1,11 @@
-const { MongoClient } = require("mongodb");
+import { MongoClient, MongoServerError } from "mongodb";
 
 const uri = process.env.MONGODB_STRING_CONNECTION;
-const client = new MongoClient(uri);
+const client = new MongoClient(uri!);
 
-const getCartByUser = async (document) => {
+export const getCartByUser = async (document: any) => {
   try {
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri!);
     // Use connect method to connect to the server
     await client.connect();
     const database = client.db("online_store");
@@ -25,9 +25,9 @@ const getCartByUser = async (document) => {
   }
 };
 
-const getUserOrderCountByDate = async (document) => {
+export const getUserOrderCountByDate = async (document: any) => {
   try {
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri!);
     await client.connect();
     const database = client.db("online_store");
     const ordersCollection = database.collection("orders");
@@ -53,9 +53,9 @@ const getUserOrderCountByDate = async (document) => {
   }
 };
 
-const addOrder = async (order) => {
+export const addOrder = async (order: any) => {
   try {
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri!);
     await client.connect();
     const database = client.db("online_store");
     const ordersCollection = database.collection("orders");
@@ -69,8 +69,8 @@ const addOrder = async (order) => {
   }
 };
 
-module.exports = {
-  getCartByUser,
-  getUserOrderCountByDate,
-  addOrder,
-};
+// module.exports = {
+//   getCartByUser,
+//   getUserOrderCountByDate,
+//   addOrder,
+// };
