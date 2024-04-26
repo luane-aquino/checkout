@@ -9,7 +9,7 @@ import { orderSchema } from "./models/order";
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.json()); // Middleware to parse JSON bodies
+app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/api/customer/:document/cart", async (req, res) => {
@@ -38,7 +38,7 @@ app.post("/api/customer/:document/checkout", async (req, res) => {
   if (canUserMakeNewPurchase) {
     try {
       await addOrder(req.body);
-      res.status(201).send({ message: "Compra realizada com sucesso." });
+      res.status(201).send({ message: "Compra realizada com sucesso" });
     } catch {
       res
         .status(500)
