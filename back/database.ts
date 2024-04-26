@@ -62,7 +62,8 @@ export const addOrder = async (order: OrderType) => {
 
     await ordersCollection.insertOne(order);
   } catch {
-    console.log("***[Error in addOrder]");
+    console.error("***[Error in addOrder]");
+    throw new Error("could not save data in DB");
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();

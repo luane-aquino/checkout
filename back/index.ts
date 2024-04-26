@@ -36,8 +36,14 @@ app.post("/api/customer/:document/checkout", async (req, res) => {
   }
   const canUserMakeNewPurchase = await canMakeNewPurchase(document);
   if (canUserMakeNewPurchase) {
-    addOrder(req.body);
-    res.status(201).send({ message: "Compra realizada com sucesso." });
+    try {
+      await addOrder(req.body);
+      res.status(201).send({ message: "Compra realizada com sucesso." });
+    } catch {
+      res
+        .status(500)
+        .send({ message: "Failed to save data due to server error" });
+    }
   } else {
     res.status(403).send({
       message:
