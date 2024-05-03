@@ -1,9 +1,8 @@
+import { OrderType, Product } from "models/order";
 import { CartType } from "store/CartProvider";
 
-// TODO refact any
-export const normalizeData = (data: any): CartType => {
-  // TODO refact type
-  const normalizedProducts = data.products.map((product: any) => {
+export const normalizeData = (data: OrderType): CartType => {
+  const normalizedProducts = data.products.map((product: Product) => {
     return {
       description: product.description,
       imageUrl: product.image_url,

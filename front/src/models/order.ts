@@ -6,7 +6,7 @@ export type OrderType = {
   payment_plan: PaymentPlan;
 };
 
-type Product = {
+export type Product = {
   description: string;
   image_url: string;
   price: number;

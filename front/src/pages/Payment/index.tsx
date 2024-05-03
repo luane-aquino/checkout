@@ -83,7 +83,6 @@ const Payment = () => {
     }
   };
 
-  // TODO refact type
   const getPayload = (data: PaymentType) => {
     const normalizedProducts = cart.products.map((product) => {
       return {
