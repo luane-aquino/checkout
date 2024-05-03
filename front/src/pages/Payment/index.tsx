@@ -12,9 +12,10 @@ import {
   usePayment,
 } from "store/PaymentDetailsProvider";
 import { useMutation } from "@tanstack/react-query";
-import { customerDocument, sendPayment } from "apis";
+import { customerDocument, makeCheckout } from "apis";
 import { CartContextType, useCart } from "store/CartProvider";
 import Loading from "components/molecules/Loading";
+import { OrderType } from "models/order";
 
 const Payment = () => {
   const {
@@ -35,9 +36,8 @@ const Payment = () => {
   const navigate = useNavigate();
   const { cart } = useCart() as CartContextType;
   const { setPaymentValue } = usePayment() as PaymentContextType;
-  // TODO refact type
   const mutation = useMutation({
-    mutationFn: (payment: any) => sendPayment(payment),
+    mutationFn: (order: OrderType) => makeCheckout(order),
     onError(error) {
       navigate("/error", { state: { errorMessage: error.message } });
     },

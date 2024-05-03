@@ -1,3 +1,5 @@
+import { OrderType } from "models/order";
+
 export const customerDocument = "12345678900";
 
 export const getProducts = async () => {
@@ -7,14 +9,13 @@ export const getProducts = async () => {
   return res.json();
 };
 
-// TODO refact any
-export const sendPayment = async (payment: any) => {
+export const makeCheckout = async (order: OrderType) => {
   const response = await fetch(
     `http://localhost:5000/api/customer/${customerDocument}/checkout`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payment),
+      body: JSON.stringify(order),
     },
   );
 
