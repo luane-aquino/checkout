@@ -49,7 +49,7 @@ describe("Payment", () => {
     ).toBeVisible();
   });
 
-  // FIXMEs test is failing in the line asserting mockUseNavigate with route /confirmation
+  // FIXME test is failing in the line asserting mockUseNavigate with route /confirmation
   it.skip("should go to /confirmation", async () => {
     (usePayment as jest.Mock).mockReturnValue({
       setPaymentValue: jest.fn(),
