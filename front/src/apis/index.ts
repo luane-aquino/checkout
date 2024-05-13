@@ -1,7 +1,7 @@
 import { OrderType } from "models/order";
 
 export const customerDocument = "12345678900";
-const base_url = process.env.BASE_URL;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 export const getProducts = async () => {
   const res = await fetch(`${base_url}/${customerDocument}/cart`);
