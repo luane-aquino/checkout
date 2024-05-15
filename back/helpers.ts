@@ -7,17 +7,19 @@ const PURCHASE_LIMIT_PER_DAY = 3;
 export const canMakeNewPurchase = async (customerDocument: string) => {
   try {
     const count = await getUserOrderCountByDate(customerDocument);
-    if (count === undefined || count === null) {
-      return false;
-    }
-    if (count >= PURCHASE_LIMIT_PER_DAY) {
-      return false;
-    }
-    return true;
+
+    return isValid(count) ? count! < PURCHASE_LIMIT_PER_DAY : false;
   } catch {
     console.log("***[Error in canMakeNewPurchase]");
     return false;
   }
+};
+
+const isValid = (value: unknown): boolean => {
+  if (typeof value === "number" || typeof value === "string") {
+    return true;
+  }
+  return false;
 };
 
 export const getDate = (dateISOStringFormat: string) => {
