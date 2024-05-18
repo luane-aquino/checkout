@@ -8,9 +8,7 @@ import { orderSchema } from "./models/order";
 
 const app = express();
 const port = 5000;
-const corsOptions = {
-  origin: "*",
-};
+const corsOptions = { origin: "https://checkout-front-gray.vercel.app" };
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
