@@ -7,7 +7,10 @@ export const getProducts = async () => {
   const res = await fetch(`${base_url}/${customerDocument}/cart`, {
     mode: "no-cors",
   });
-  return res.json();
+  console.log("***[res]", res);
+  const cart = await res.json();
+  console.log("***[cart]", cart);
+  return cart;
 };
 
 export const makeCheckout = async (order: OrderType) => {
