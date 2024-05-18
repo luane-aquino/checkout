@@ -17,7 +17,7 @@ app.get("/api/customer/:document/cart", async (req, res) => {
   const document = req.params.document;
   const cart = await getCartByUser(document);
   console.log("***[back-cart]", cart);
-  res.json(cart);
+  res?.json(cart);
 });
 
 app.post("/api/customer/:document/checkout", async (req, res) => {
