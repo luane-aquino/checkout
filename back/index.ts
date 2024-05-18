@@ -8,9 +8,14 @@ import { orderSchema } from "./models/order";
 
 const app = express();
 const port = 5000;
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.get("/api/customer/:document/cart", async (req, res) => {
   const document = req.params.document;
