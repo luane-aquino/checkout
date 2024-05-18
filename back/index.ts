@@ -16,6 +16,7 @@ app.use(cors(corsOptions));
 app.get("/api/customer/:document/cart", async (req, res) => {
   const document = req.params.document;
   const cart = await getCartByUser(document);
+  console.log("***[back-cart]", cart);
   res.json(cart);
 });
 
