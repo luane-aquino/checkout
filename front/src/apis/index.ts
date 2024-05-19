@@ -8,9 +8,7 @@ export const getProducts = async () => {
     mode: "no-cors",
   });
   console.log("***[res]", res);
-  const cart = await res.json();
-  console.log("***[cart]", cart);
-  return cart;
+  return await res.json();
 };
 
 export const makeCheckout = async (order: OrderType) => {
